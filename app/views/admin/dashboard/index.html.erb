@@ -1,0 +1,21 @@
+<h1 class="text-3xl font-bold text-navy mb-6">Dashboard</h1>
+
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Posts</h2>
+    <p class="text-4xl text-british-red"><%= @posts_count %></p>
+    <%= link_to "Manage Posts", admin_posts_path, class: "text-navy hover:underline mt-2 inline-block" %>
+  </div>
+  
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Campuses</h2>
+    <p class="text-4xl text-british-red"><%= @campuses_count %></p>
+    <%= link_to "Manage Campuses", admin_campu_index_path, class: "text-navy hover:underline mt-2 inline-block" %>
+  </div>
+  
+  <div class="bg-white p-6 rounded shadow">
+    <h2 class="text-xl font-semibold mb-2">Pending Inquiries</h2>
+    <p class="text-4xl text-british-red"><%= @inquiries_count %></p>
+    <%= link_to "View Inquiries", admin_inquiries_path, class: "text-navy hover:underline mt-2 inline-block" %>
+  </div>
+</div>

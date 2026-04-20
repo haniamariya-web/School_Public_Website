@@ -69,7 +69,4 @@ gem "tailwindcss-rails", "~> 4.4"
 
 gem 'devise'
 gem 'pundit'
-gem 'activeadmin'
 gem 'simple_form'
-
-gem "dartsass-rails"

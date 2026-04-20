@@ -1,0 +1,19 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-3xl font-bold text-navy">Campuses</h1>
+  <%= link_to "New Campus", new_admin_campu_path, class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <% @campuses.each do |campus| %>
+    <div class="bg-white rounded shadow p-6">
+      <h2 class="text-xl font-bold text-navy mb-2"><%= campus.name %></h2>
+      <p class="text-gray-600 mb-1"><%= campus.address %></p>
+      <p class="text-gray-600 mb-1">Phone: <%= campus.phone %></p>
+      <p class="text-gray-600 mb-4">Email: <%= campus.email %></p>
+      <div class="flex gap-2">
+        <%= link_to "Edit", edit_admin_campu_path(campus), class: "text-navy hover:underline" %>
+        <%= button_to "Delete", admin_campu_path(campus), method: :delete, class: "text-red-600 hover:underline", data: { turbo_confirm: "Are you sure?" } %>
+      </div>
+    </div>
+  <% end %>
+</div>

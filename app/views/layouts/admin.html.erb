@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Dashboard</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
+  <%= javascript_importmap_tags %>
+</head>
+<body class="bg-gray-100">
+  <nav class="bg-navy text-white p-4 flex justify-between items-center">
+    <div class="flex gap-6">
+      <%= link_to "Dashboard", admin_root_path, class: "hover:text-british-red" %>
+      <%= link_to "Posts", admin_posts_path, class: "hover:text-british-red" %>
+      <%= link_to "Campuses", admin_campu_index_path, class: "hover:text-british-red" %>
+      <%= link_to "Inquiries", admin_inquiries_path, class: "hover:text-british-red" %>
+    </div>
+    <%= button_to "Logout", destroy_admin_user_session_path, method: :delete, class: "bg-british-red px-4 py-2 rounded hover:bg-red-700" %>
+  </nav>
+  <main class="p-6">
+    <%= yield %>
+  </main>
+</body>
+</html>

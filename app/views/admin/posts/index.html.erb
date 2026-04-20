@@ -1,0 +1,30 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-3xl font-bold text-navy">Posts</h1>
+  <%= link_to "New Post", new_admin_post_path, class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+</div>
+
+<div class="bg-white rounded shadow overflow-hidden">
+  <table class="min-w-full">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-6 py-3 text-left">Title</th>
+        <th class="px-6 py-3 text-left">Campus</th>
+        <th class="px-6 py-3 text-left">Published</th>
+        <th class="px-6 py-3 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @posts.each do |post| %>
+        <tr class="border-t">
+          <td class="px-6 py-4"><%= post.title %></td>
+          <td class="px-6 py-4"><%= post.campus&.name || "All Campuses" %></td>
+          <td class="px-6 py-4"><%= post.published_at&.strftime("%b %d, %Y") || "Draft" %></td>
+          <td class="px-6 py-4">
+            <%= link_to "Edit", edit_admin_post_path(post), class: "text-navy hover:underline mr-2" %>
+            <%= button_to "Delete", admin_post_path(post), method: :delete, class: "text-red-600 hover:underline", data: { turbo_confirm: "Are you sure?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

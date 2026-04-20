@@ -1,0 +1,40 @@
+<h1 class="text-3xl font-bold text-navy mb-6">Inquiries</h1>
+
+<div class="bg-white rounded shadow overflow-hidden">
+  <table class="min-w-full">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-6 py-3 text-left">Name</th>
+        <th class="px-6 py-3 text-left">Email</th>
+        <th class="px-6 py-3 text-left">Phone</th>
+        <th class="px-6 py-3 text-left">Grade Level</th>
+        <th class="px-6 py-3 text-left">Submitted</th>
+        <th class="px-6 py-3 text-left">Status</th>
+        <th class="px-6 py-3 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @inquiries.each do |inquiry| %>
+        <tr class="border-t">
+          <td class="px-6 py-4"><%= inquiry.name %></td>
+          <td class="px-6 py-4"><%= inquiry.email %></td>
+          <td class="px-6 py-4"><%= inquiry.phone %></td>
+          <td class="px-6 py-4"><%= inquiry.grade_level %></td>
+          <td class="px-6 py-4"><%= inquiry.created_at.strftime("%b %d, %Y") %></td>
+          <td class="px-6 py-4">
+            <% if inquiry.status == 1 %>
+              <span class="bg-green-100 text-green-700 px-2 py-1 rounded">Contacted</span>
+            <% else %>
+              <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Pending</span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4">
+            <% if inquiry.status != 1 %>
+              <%= button_to "Mark Contacted", mark_contacted_admin_inquiry_path(inquiry), method: :patch, class: "bg-british-red text-white px-3 py-1 rounded hover:bg-red-700" %>
+            <% end %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

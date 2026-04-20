@@ -1,0 +1,44 @@
+<h1 class="text-3xl font-bold text-navy mb-6">Edit Post</h1>
+
+<%= form_with model: [:admin, @post], class: "bg-white p-6 rounded shadow" do |f| %>
+  <% if @post.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <h2 class="font-bold"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% @post.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= f.label :title, class: "block text-navy font-semibold mb-2" %>
+    <%= f.text_field :title, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :content, class: "block text-navy font-semibold mb-2" %>
+    <%= f.text_area :content, rows: 10, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :post_type, class: "block text-navy font-semibold mb-2" %>
+    <%= f.select :post_type, Post.post_types.keys.map { |k| [k.humanize, k] }, {}, { class: "w-full border border-gray-300 rounded p-2" } %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :campus_id, "Campus", class: "block text-navy font-semibold mb-2" %>
+    <%= f.collection_select :campus_id, Campu.all, :id, :name, { include_blank: "Select Campus" }, { class: "w-full border border-gray-300 rounded p-2" } %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :published_at, class: "block text-navy font-semibold mb-2" %>
+    <%= f.datetime_local_field :published_at, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="flex gap-2">
+    <%= f.submit "Update Post", class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+    <%= link_to "Cancel", admin_posts_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+  </div>
+<% end %>

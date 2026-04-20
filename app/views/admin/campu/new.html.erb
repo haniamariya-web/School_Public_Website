@@ -1,0 +1,44 @@
+<h1 class="text-3xl font-bold text-navy mb-6">New Campus</h1>
+
+<%= form_with model: @campu, url: admin_campu_index_path, class: "bg-white p-6 rounded shadow" do |f| %>
+  <% if @campu.errors.any? %>
+    <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+      <h2 class="font-bold"><%= pluralize(@campu.errors.count, "error") %> prohibited this campus from being saved:</h2>
+      <ul class="list-disc list-inside">
+        <% @campu.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= f.label :name, class: "block text-navy font-semibold mb-2" %>
+    <%= f.text_field :name, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :address, class: "block text-navy font-semibold mb-2" %>
+    <%= f.text_area :address, rows: 3, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :phone, class: "block text-navy font-semibold mb-2" %>
+    <%= f.text_field :phone, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :email, class: "block text-navy font-semibold mb-2" %>
+    <%= f.email_field :email, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="mb-4">
+    <%= f.label :principal_name, class: "block text-navy font-semibold mb-2" %>
+    <%= f.text_field :principal_name, class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <div class="flex gap-2">
+    <%= f.submit "Create Campus", class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+    <%= link_to "Cancel", admin_campu_index_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+  </div>
+<% end %>
