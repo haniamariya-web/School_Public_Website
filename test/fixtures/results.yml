@@ -1,0 +1,21 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  student_name: MyString
+  roll_number: MyString
+  level: MyString
+  obtained_marks: 1
+  total_marks: 1
+  grade: MyString
+  academic_year: MyString
+  campus: one
+
+two:
+  student_name: MyString
+  roll_number: MyString
+  level: MyString
+  obtained_marks: 1
+  total_marks: 1
+  grade: MyString
+  academic_year: MyString
+  campus: two

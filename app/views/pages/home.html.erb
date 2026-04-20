@@ -1,0 +1,283 @@
+<div class="min-h-screen bg-white">
+  <!-- Navbar -->
+  <nav class="bg-navy text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <%= link_to root_path, class: "flex items-center space-x-2" do %>
+          <span class="text-2xl font-bold text-british-red">BIS</span>
+          <span class="text-sm font-light tracking-wide">Britain International School<br><span class="text-xs">Al-Muqeet Campus</span></span>
+        <% end %>
+        
+        <div class="hidden md:flex space-x-8">
+          <%= link_to "About", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "Academics", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "Result", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "BIS Life", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "Contact Us", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+        </div>
+        
+        <button class="bg-british-red px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold shadow-md tracking-wide">
+          <%= link_to "Admissions Open", new_inquiry_path, class: "..." %>
+        </button>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Carousel -->
+  <div class="relative" data-controller="carousel" data-carousel-index-value="0">
+    <div class="relative h-[600px] md:h-[700px] overflow-hidden">
+      
+      <!-- Slide 1 - Classroom -->
+      <div data-carousel-target="slide" class="absolute inset-0 bg-cover bg-center transition-all duration-700 ease-in-out" style="background-image: linear-gradient(rgba(0,33,71,0.6), rgba(0,33,71,0.7)), url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600');">
+        <div class="flex flex-col justify-center items-center h-full text-white text-center px-4">
+          <p class="text-yellow-300 text-lg tracking-wider mb-2 font-light">EST. 1955</p>
+          <h1 class="text-6xl md:text-8xl font-light mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">Nurturing Excellence</h1>
+          <p class="text-xl md:text-2xl mb-8 font-light">Since 1955</p>
+          <button class="bg-british-red px-10 py-3 rounded-full hover:bg-red-700 transition text-sm font-semibold tracking-wide">
+            Discover More
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide 2 - Admissions -->
+      <div data-carousel-target="slide" class="absolute inset-0 bg-cover bg-center hidden transition-all duration-700 ease-in-out" style="background-image: linear-gradient(rgba(0,33,71,0.6), rgba(0,33,71,0.7)), url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600');">
+        <div class="flex flex-col justify-center items-center h-full text-white text-center px-4">
+          <h1 class="text-6xl md:text-7xl font-light mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">Admissions Open</h1>
+          <p class="text-2xl md:text-3xl mb-2 font-light">Play Group to Matric & Hifz-Ul-Quran</p>
+          <p class="text-lg md:text-xl mb-8 text-yellow-300">No Admission Fee • No Summer Vacation Fee</p>
+          <button class="bg-british-red px-10 py-3 rounded-full hover:bg-red-700 transition text-sm font-semibold tracking-wide">
+            Enroll Today
+          </button>
+        </div>
+      </div>
+
+      <!-- Slide 3 - Islamic Education -->
+      <div data-carousel-target="slide" class="absolute inset-0 bg-cover bg-center hidden transition-all duration-700 ease-in-out" style="background-image: linear-gradient(rgba(0,33,71,0.6), rgba(0,33,71,0.7)), url('https://images.unsplash.com/photo-1584552184681-6a7b1d76e3c3?w=1600');">
+        <div class="flex flex-col justify-center items-center h-full text-white text-center px-4">
+          <h1 class="text-6xl md:text-7xl font-light mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">Connecting Hearts</h1>
+          <p class="text-xl md:text-2xl mb-8 font-light">Specialized Hifz-Ul-Quran program integrated with modern academics</p>
+          <button class="bg-british-red px-10 py-3 rounded-full hover:bg-red-700 transition text-sm font-semibold tracking-wide">
+            Learn More
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Carousel Controls -->
+    <button data-action="click->carousel#previous" class="absolute left-6 top-1/2 -translate-y-1/2 bg-black/40 text-white p-3 rounded-full hover:bg-british-red transition-all duration-300 backdrop-blur-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+      </svg>
+    </button>
+    <button data-action="click->carousel#next" class="absolute right-6 top-1/2 -translate-y-1/2 bg-black/40 text-white p-3 rounded-full hover:bg-british-red transition-all duration-300 backdrop-blur-sm">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+      </svg>
+    </button>
+
+    <!-- Dots -->
+    <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      <button data-carousel-dot="0" data-action="click->carousel#goToSlide" class="w-2 h-2 rounded-full bg-white/50 hover:bg-british-red transition-all duration-300"></button>
+      <button data-carousel-dot="1" data-action="click->carousel#goToSlide" class="w-2 h-2 rounded-full bg-white/50 hover:bg-british-red transition-all duration-300"></button>
+      <button data-carousel-dot="2" data-action="click->carousel#goToSlide" class="w-2 h-2 rounded-full bg-white/50 hover:bg-british-red transition-all duration-300"></button>
+    </div>
+  </div>
+
+  <!-- Stats Counter -->
+  <div class="bg-navy py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8 text-center">
+        <div>
+          <div class="text-5xl font-light text-british-red mb-2" style="font-family: 'Playfair Display', serif;" data-controller="counter" data-counter-target="15">15,000+</div>
+          <p class="text-white text-sm tracking-wide">Students Enrolled</p>
+        </div>
+        <div>
+          <div class="text-5xl font-light text-british-red mb-2" style="font-family: 'Playfair Display', serif;">40+</div>
+          <p class="text-white text-sm tracking-wide">Campuses Nationwide</p>
+        </div>
+        <div>
+          <div class="text-5xl font-light text-british-red mb-2" style="font-family: 'Playfair Display', serif;">1,000+</div>
+          <p class="text-white text-sm tracking-wide">Dedicated Team Members</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mission Statement -->
+  <div class="py-24 bg-white">
+    <div class="max-w-4xl mx-auto px-4 text-center">
+      <div class="w-16 h-px bg-british-red mx-auto mb-8"></div>
+      <p class="text-navy text-2xl md:text-3xl font-light leading-relaxed" style="font-family: 'Playfair Display', serif;">
+        "A unique combination of Modern & Islamic Education"
+      </p>
+      <div class="w-16 h-px bg-british-red mx-auto mt-8"></div>
+    </div>
+  </div>
+
+  <!-- Slogan Banner -->
+  <div class="bg-gray-50 py-10">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <p class="text-navy text-xl md:text-2xl font-light tracking-wide">Empowering the Leaders of Tomorrow</p>
+    </div>
+  </div>
+
+  <!-- Why Choose Us -->
+  <div class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-light text-navy text-center mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">Why Choose BIS</h2>
+      <div class="w-16 h-px bg-british-red mx-auto mb-12"></div>
+      
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center group cursor-pointer">
+          <div class="w-20 h-20 rounded-full border border-navy/20 flex items-center justify-center mx-auto mb-5 group-hover:border-british-red transition-all duration-300">
+            <svg class="w-8 h-8 text-navy group-hover:text-british-red transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-navy mb-2">Modern & Islamic</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Unique curriculum balancing religious values with modern education</p>
+        </div>
+
+        <div class="text-center group cursor-pointer">
+          <div class="w-20 h-20 rounded-full border border-navy/20 flex items-center justify-center mx-auto mb-5 group-hover:border-british-red transition-all duration-300">
+            <svg class="w-8 h-8 text-navy group-hover:text-british-red transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-navy mb-2">Specialized Events</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Bazm-e-Qur'an, Qir'at & Naat contests, Fun Carnivals</p>
+        </div>
+
+        <div class="text-center group cursor-pointer">
+          <div class="w-20 h-20 rounded-full border border-navy/20 flex items-center justify-center mx-auto mb-5 group-hover:border-british-red transition-all duration-300">
+            <svg class="w-8 h-8 text-navy group-hover:text-british-red transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-navy mb-2">Faculty Excellence</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Dedicated Teachers' Day celebrations honoring qualified staff</p>
+        </div>
+
+        <div class="text-center group cursor-pointer">
+          <div class="w-20 h-20 rounded-full border border-navy/20 flex items-center justify-center mx-auto mb-5 group-hover:border-british-red transition-all duration-300">
+            <svg class="w-8 h-8 text-navy group-hover:text-british-red transition" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+            </svg>
+          </div>
+          <h3 class="text-lg font-semibold text-navy mb-2">Proven Results</h3>
+          <p class="text-gray-500 text-sm leading-relaxed">Strong PTM focus and collaborative student tracking</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Campus Facilities -->
+  <div class="py-24 bg-gray-50">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-light text-navy text-center mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">Campus Facilities</h2>
+      <div class="w-16 h-px bg-british-red mx-auto mb-12"></div>
+      
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="relative h-80 rounded-sm overflow-hidden shadow-md group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <h3 class="text-white text-xl font-light tracking-wide">Smart Classrooms</h3>
+            <p class="text-gray-200 text-sm">Modern teaching methodologies</p>
+          </div>
+        </div>
+
+        <div class="relative h-80 rounded-sm overflow-hidden shadow-md group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <h3 class="text-white text-xl font-light tracking-wide">Science & IT Labs</h3>
+            <p class="text-gray-200 text-sm">Practical learning facilities</p>
+          </div>
+        </div>
+
+        <div class="relative h-80 rounded-sm overflow-hidden shadow-md group">
+          <div class="absolute inset-0 bg-cover bg-center transition-transform duration-700 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1535961652354-923cb08225e8?w=800');"></div>
+          <div class="absolute inset-0 bg-gradient-to-t from-navy/80 to-transparent"></div>
+          <div class="absolute bottom-0 left-0 right-0 p-6">
+            <h3 class="text-white text-xl font-light tracking-wide">Sports & Security</h3>
+            <p class="text-gray-200 text-sm">Physical education & high safety standards</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Testimonials -->
+  <div class="py-24 bg-white">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-3xl md:text-4xl font-light text-navy text-center mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">What Parents Say</h2>
+      <div class="w-16 h-px bg-british-red mx-auto mb-12"></div>
+      
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-gray-50 p-8">
+          <p class="text-gray-600 text-lg font-light italic mb-4 leading-relaxed">"The supportive and communicative environment for parents at BIS is exceptional. The PTMs are truly collaborative."</p>
+          <p class="font-semibold text-navy text-sm tracking-wide">— Parent of Grade 5 Student</p>
+        </div>
+        <div class="bg-gray-50 p-8">
+          <p class="text-gray-600 text-lg font-light italic mb-4 leading-relaxed">"My son has excelled both academically and spiritually. The Hifz program integrated with modern education is a blessing."</p>
+          <p class="font-semibold text-navy text-sm tracking-wide">— Parent of Hifz Student</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="bg-navy text-white pt-16 pb-8">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="grid md:grid-cols-4 gap-12">
+        <div>
+          <h3 class="text-2xl font-light text-british-red mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">BIS</h3>
+          <p class="text-gray-300 text-sm">Britain International School System</p>
+          <p class="text-gray-300 text-sm mt-2">Al-Muqeet Campus</p>
+          <p class="text-gray-400 text-xs mt-4">Nurturing excellence since 1955</p>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold text-sm tracking-wide mb-4">QUICK LINKS</h4>
+          <ul class="space-y-2 text-gray-300 text-sm">
+            <li><%= link_to "About Us", "#", class: "hover:text-british-red transition" %></li>
+            <li><%= link_to "Academics", "#", class: "hover:text-british-red transition" %></li>
+            <li><%= link_to "Admissions", "#", class: "hover:text-british-red transition" %></li>
+            <li><%= link_to "Hifz Program", "#", class: "hover:text-british-red transition" %></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold text-sm tracking-wide mb-4">CONTACT</h4>
+          <ul class="space-y-2 text-gray-300 text-sm">
+            <li class="leading-relaxed">566-567, Block G, Phase 1<br>Opposite G-1 Market, Johar Town<br>Lahore, Pakistan</li>
+            <li>0301-8034023</li>
+            <li>almuqeetcampus@britain.edu.pk</li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold text-sm tracking-wide mb-4">FOLLOW</h4>
+          <div class="flex space-x-3">
+            <a href="#" class="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:border-british-red hover:bg-british-red transition-all duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0z"></path>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"></path>
+              </svg>
+            </a>
+            <a href="#" class="w-10 h-10 rounded-full border border-gray-500 flex items-center justify-center hover:border-british-red hover:bg-british-red transition-all duration-300">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0z"></path>
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+      
+      <div class="border-t border-gray-800 mt-12 pt-8 text-center text-gray-500 text-xs tracking-wide">
+        <p>&copy; 2026 Britain International School System - Al-Muqeet Campus. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+</div>
