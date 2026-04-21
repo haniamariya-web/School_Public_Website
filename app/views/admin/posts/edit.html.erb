@@ -1,6 +1,6 @@
 <h1 class="text-3xl font-bold text-navy mb-6">Edit Post</h1>
 
-<%= form_with model: [:admin, @post], class: "bg-white p-6 rounded shadow" do |f| %>
+<%= form_with model: [:admin, @post], local: true, html: { multipart: true, class: "bg-white p-6 rounded shadow" } do |f| %>
   <% if @post.errors.any? %>
     <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
       <h2 class="font-bold"><%= pluralize(@post.errors.count, "error") %> prohibited this post from being saved:</h2>
@@ -22,9 +22,36 @@
     <%= f.text_area :content, rows: 10, class: "w-full border border-gray-300 rounded p-2" %>
   </div>
 
+  <!-- Current Image -->
+  <% if @post.image.attached? %>
+    <div class="mb-4 p-4 bg-gray-50 rounded">
+      <p class="text-sm text-navy font-semibold mb-2">Current Image:</p>
+      <%= image_tag @post.image, class: "max-h-48 rounded" %>
+      <%= link_to "Remove Image", remove_image_admin_post_path(@post), method: :delete, class: "text-red-600 text-sm mt-2 inline-block hover:underline", data: { confirm: "Are you sure?" } %>
+    </div>
+  <% end %>
+  
+  <!-- Current Video -->
+  <% if @post.video.attached? %>
+    <div class="mb-4 p-4 bg-gray-50 rounded">
+      <p class="text-sm text-navy font-semibold mb-2">Current Video:</p>
+      <video controls class="max-h-48 rounded">
+        <source src="<%= url_for(@post.video) %>">
+      </video>
+      <%= link_to "Remove Video", remove_video_admin_post_path(@post), method: :delete, class: "text-red-600 text-sm mt-2 inline-block hover:underline", data: { confirm: "Are you sure?" } %>
+    </div>
+  <% end %>
+
+  <!-- Replace Image -->
   <div class="mb-4">
-    <%= f.label :post_type, class: "block text-navy font-semibold mb-2" %>
-    <%= f.select :post_type, Post.post_types.keys.map { |k| [k.humanize, k] }, {}, { class: "w-full border border-gray-300 rounded p-2" } %>
+    <%= f.label :image, "Replace Image", class: "block text-navy font-semibold mb-2" %>
+    <%= f.file_field :image, accept: "image/png,image/jpeg,image/jpg,image/gif,image/webp", class: "w-full border border-gray-300 rounded p-2" %>
+  </div>
+
+  <!-- Replace Video -->
+  <div class="mb-4">
+    <%= f.label :video, "Replace Video", class: "block text-navy font-semibold mb-2" %>
+    <%= f.file_field :video, accept: "video/mp4,video/mpeg,video/quicktime", class: "w-full border border-gray-300 rounded p-2" %>
   </div>
 
   <div class="mb-4">

@@ -15,11 +15,14 @@
           <%= link_to "BIS Life", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
           <%= link_to "Contact Us", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
         </div>
-        
+        <%= link_to new_admin_user_session_path, class: "text-white hover:text-british-red transition text-sm tracking-wide border border-gray-600 px-4 py-1.5 rounded-full hover:border-british-red" do %>
+          Admin Login
+        <% end %>
         <button class="bg-british-red px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold shadow-md tracking-wide">
           <%= link_to "Admissions Open", new_inquiry_path, class: "..." %>
         </button>
       </div>
+      
     </div>
   </nav>
 

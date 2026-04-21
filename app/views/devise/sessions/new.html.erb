@@ -1,0 +1,51 @@
+<div class="min-h-screen flex items-center justify-center p-4" style="background: linear-gradient(135deg, #002147 0%, #001a38 100%);">
+  <div class="max-w-md w-full">
+    <!-- Logo -->
+    <div class="text-center mb-8">
+      <div class="inline-flex items-center space-x-2">
+        <span class="text-4xl font-bold text-british-red">BIS</span>
+        <span class="text-white text-sm font-light tracking-wide">Admin Portal</span>
+      </div>
+      <div class="w-16 h-px bg-british-red mx-auto mt-4"></div>
+    </div>
+
+    <!-- Login Card -->
+    <div class="bg-white rounded-sm shadow-2xl p-8">
+      <h2 class="text-2xl font-light text-navy text-center mb-6" style="font-family: 'Playfair Display', serif;">Welcome Back</h2>
+      
+      <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), html: { class: "space-y-6" }) do |f| %>
+        
+        <div>
+          <%= f.label :email, class: "block text-navy text-sm font-semibold mb-2" %>
+          <%= f.email_field :email, required: false, autofocus: true, autocomplete: "email", class: "w-full border border-gray-300 rounded-sm p-3 focus:outline-none focus:border-british-red transition", placeholder: "admin@school.com" %>
+        </div>
+
+        <div>
+          <%= f.label :password, class: "block text-navy text-sm font-semibold mb-2" %>
+          <%= f.password_field :password, required: false, autocomplete: "current-password", class: "w-full border border-gray-300 rounded-sm p-3 focus:outline-none focus:border-british-red transition", placeholder: "••••••••" %>
+        </div>
+
+        <% if devise_mapping.rememberable? %>
+          <div class="flex items-center justify-between">
+            <label class="flex items-center">
+              <%= f.check_box :remember_me, class: "rounded border-gray-300 text-british-red focus:ring-british-red" %>
+              <span class="ml-2 text-sm text-gray-600">Remember me</span>
+            </label>
+          </div>
+        <% end %>
+
+        <%= f.submit "Sign In", class: "w-full bg-british-red text-white py-3 rounded-sm hover:bg-red-700 transition font-semibold tracking-wide cursor-pointer" %>
+      <% end %>
+
+      <!-- Footer Note -->
+      <div class="mt-6 pt-6 border-t border-gray-200 text-center">
+        <p class="text-xs text-gray-500">Secure access for authorized administrators only</p>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-8">
+      <p class="text-gray-400 text-xs">&copy; 2026 Britain International School System</p>
+    </div>
+  </div>
+</div>

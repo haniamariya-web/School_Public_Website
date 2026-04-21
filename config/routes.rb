@@ -1,13 +1,25 @@
 Rails.application.routes.draw do
-  devise_for :admin_users, skip: [:registrations]
+  devise_for :admin_users, skip: [:registrations], controllers: {
+    sessions: 'admin/sessions'
+  }
   
-  # Admin namespace
   namespace :admin do
     root to: "dashboard#index"
-    resources :posts
+    resources :posts do
+      member do
+        delete :remove_image
+        delete :remove_video
+      end
+    end
     resources :campu
     resources :inquiries do
       patch :mark_contacted, on: :member
+    end
+    resources :albums do
+      member do
+        post :add_post
+        delete :remove_post
+      end
     end
   end
   
