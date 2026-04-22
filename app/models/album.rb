@@ -10,14 +10,19 @@ class Album < ApplicationRecord
   
   scope :recent, -> { order(event_date: :desc) }
   
-  def cover_or_fallback
-    return cover_image if cover_image.attached?
+  def cover_or_fallback_url
+    if cover_image.attached?
+      Rails.application.routes.url_helpers.rails_blob_url(cover_image, only_path: true)
+    else
+      first_post_image = posts.includes(image_attachment: :blob).find do |post|
+        post.image.attached?
+      end
     
-    # Find first post with attached image
-    posts.each do |post|
-      return post.image if post.image.attached?
+      if first_post_image
+        Rails.application.routes.url_helpers.rails_blob_url(first_post_image.image, only_path: true)
+      else
+        nil
+      end
     end
-    
-    nil
   end
 end

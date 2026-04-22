@@ -1,0 +1,24 @@
+ <nav class="bg-navy text-white sticky top-0 z-50 shadow-lg">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex justify-between items-center h-16">
+        <%= link_to root_path, class: "flex items-center space-x-2" do %>
+          <span class="text-2xl font-bold text-british-red">BIS</span>
+          <span class="text-sm font-light tracking-wide">Britain International School<br><span class="text-xs">Al-Muqeet Campus</span></span>
+        <% end %>
+        
+        <div class="hidden md:flex space-x-8">
+          <%= link_to "About", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "Academics", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "Result", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "BIS Life", gallery_path, class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%= link_to "Contact Us", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
+          <%=link_to "Admin Portal", admin_root_path, class: "hover:text-british-red transition text-sm tracking-wide" %>
+        </div>
+        
+        <button class="bg-british-red px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold shadow-md tracking-wide">
+          <%= link_to "Admissions Open", new_inquiry_path, class: "..." %>
+        </button>
+      </div>
+      
+    </div>
+  </nav>

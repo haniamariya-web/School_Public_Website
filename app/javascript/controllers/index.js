@@ -2,3 +2,6 @@
 import { application } from "controllers/application"
 import { eagerLoadControllersFrom } from "@hotwired/stimulus-loading"
 eagerLoadControllersFrom("controllers", application)
+
+import ScrollCarouselController from "./scroll_carousel_controller"
+application.register("scroll-carousel", ScrollCarouselController)

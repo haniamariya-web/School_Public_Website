@@ -1,0 +1,94 @@
+<div class="min-h-screen bg-gray-50">
+
+  <!-- HERO -->
+  <section class="bg-navy text-white">
+    <div class="max-w-7xl mx-auto px-6 py-20 text-center">
+      <p class="text-xs tracking-widest text-gray-300 mb-4">GALLERY</p>
+
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-tight">
+        Moments That Matter
+      </h1>
+
+      <div class="w-14 h-[2px] bg-british-red mx-auto my-6"></div>
+
+      <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base">
+        A glimpse into events, achievements, and everyday life across our campuses
+      </p>
+    </div>
+  </section>
+
+  <div class="max-w-7xl mx-auto px-6 py-14">
+
+    <!-- FEATURED ALBUMS -->
+    <section class="mb-16">
+      <div class="flex justify-between items-center mb-6">
+        <h2 class="text-xl font-semibold text-navy">Featured Albums</h2>
+
+        <!-- NAV -->
+        <div class="flex gap-2" data-controller="scroll-carousel">
+          <button data-action="click->scroll-carousel#prev"
+            class="p-2 border rounded-md hover:border-british-red hover:text-british-red transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor">
+              <path stroke-width="2" d="M15 19l-7-7 7-7"/>
+            </svg>
+          </button>
+
+          <button data-action="click->scroll-carousel#next"
+            class="p-2 border rounded-md hover:border-british-red hover:text-british-red transition">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor">
+              <path stroke-width="2" d="M9 5l7 7-7 7"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <% if @albums.any? %>
+        <div data-scroll-carousel-target="container"
+             class="flex gap-6 overflow-x-auto scroll-smooth pb-3 snap-x snap-mandatory">
+
+          <% @albums.each do |album| %>
+            <%= link_to gallery_album_path(album),
+              class: "group flex-shrink-0 w-[75%] sm:w-[320px] min-w-[260px] snap-start" do %>
+            
+              <div class="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition">
+                
+                <div class="aspect-[4/3] w-full overflow-hidden bg-gray-200">
+                  <% if (img = gallery_image(album)).present? %>
+                    <%= image_tag img,
+                      class: "w-full h-full object-cover aspect-[4/3]" %>
+                  <% else %>
+                    <div class="w-full h-full flex items-center justify-center bg-gray-200">
+                      <span>No image</span>
+                    </div>
+                  <% end %>
+                </div>
+            
+                <div class="p-4">
+                  <h3 class="text-sm font-semibold text-navy line-clamp-1 group-hover:text-british-red transition">
+                    <%= album.title %>
+                  </h3>
+            
+                  <p class="text-xs text-gray-500 mt-1">
+                    <%= album.event_date&.strftime("%b %d, %Y") || "Upcoming" %>
+                  </p>
+            
+                  <p class="text-xs text-gray-400 mt-1">
+                    <%= album.campus&.name || "All Campuses" %>
+                  </p>
+                </div>
+            
+              </div>
+            
+            <% end %>
+          <% end %>
+        </div>
+      
+      <% else %>
+        <div class="bg-white border rounded-lg p-10 text-center text-gray-500">
+          No posts available
+        </div>
+      <% end %>
+    </section>
+
+  </div>
+</div>

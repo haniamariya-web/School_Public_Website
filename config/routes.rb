@@ -26,6 +26,9 @@ Rails.application.routes.draw do
   # ... rest of your routes (public ones)
   get "inquiries/new"
   get "inquiries/create"
+
+  get "gallery", to: "gallery#index"
+  get "gallery/album/:id", to: "gallery#show", as: :gallery_album
   get "pages/home"
   get "up" => "rails/health#show", as: :rails_health_check
   resources :inquiries, only: [:new, :create]
