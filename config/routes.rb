@@ -31,6 +31,7 @@ Rails.application.routes.draw do
   get "gallery/album/:id", to: "gallery#show", as: :gallery_album
   get "pages/home"
   get "about", to: "pages#about"
+  get "campuses", to: "campuses#index"
   get "up" => "rails/health#show", as: :rails_health_check
   resources :inquiries, only: [:new, :create]
   get '/admissions', to: 'inquiries#new'
