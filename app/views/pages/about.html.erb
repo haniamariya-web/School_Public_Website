@@ -1,0 +1,156 @@
+<div class="min-h-screen bg-white" data-controller="about">
+  <section class="relative h-[400px] flex items-center justify-center bg-navy overflow-hidden">
+    <div class="absolute inset-0 opacity-20 bg-[url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?w=1600')] bg-cover bg-center"></div>
+    <div class="relative text-center px-4">
+      <h1 class="text-5xl md:text-7xl font-light text-white mb-4 tracking-tight" style="font-family: 'Playfair Display', serif;">Our Heritage</h1>
+      <div class="w-20 h-1 bg-british-red mx-auto"></div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-white">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="reveal transition-all duration-1000 transform opacity-0 translate-y-10">
+          <h2 class="text-3xl md:text-4xl font-light text-navy mb-6" style="font-family: 'Playfair Display', serif;">Message from the Chairman</h2>
+          <p class="text-gray-600 leading-relaxed mb-8 text-lg font-light">
+            At Britain International School System, we believe that education is more than just grades. It is about shaping the soul and the mind in unison. Our philosophy is built upon a simple yet profound three-pillar model for success.
+          </p>
+          
+          <div class="grid gap-6">
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-gray-50 flex items-center justify-center border border-navy/10 text-navy font-serif italic text-xl">1</div>
+              <div>
+                <h4 class="font-semibold text-navy">Unwavering Hardwork</h4>
+                <p class="text-sm text-gray-500">The foundation of every achievement is persistent effort.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-gray-50 flex items-center justify-center border border-navy/10 text-navy font-serif italic text-xl">2</div>
+              <div>
+                <h4 class="font-semibold text-navy">Fair Intentions</h4>
+                <p class="text-sm text-gray-500">Success is only meaningful when achieved through integrity.</p>
+              </div>
+            </div>
+            <div class="flex items-start space-x-4">
+              <div class="flex-shrink-0 w-12 h-12 bg-gray-50 flex items-center justify-center border border-navy/10 text-navy font-serif italic text-xl">3</div>
+              <div>
+                <h4 class="font-semibold text-navy">Prayers of Others</h4>
+                <p class="text-sm text-gray-500">We grow through the goodwill and service we provide to our community.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-gray-50 p-12 border-l-4 border-british-red reveal transition-all duration-1000 delay-200 transform opacity-0 translate-y-10">
+          <h3 class="text-2xl font-light text-navy mb-4 italic" style="font-family: 'Playfair Display', serif;">"A Culture of True Learning"</h3>
+          <p class="text-gray-600 mb-6 leading-relaxed">
+            We take pride in our strict <strong>No Tuition Culture</strong>. Our school is designed to be a complete learning ecosystem where every academic need is met within our walls, removing the burden of external coaching from parents and students.
+          </p>
+          <p class="text-navy font-semibold tracking-wider text-sm uppercase">Britain Group of Schools</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-navy text-white">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      <h2 class="text-3xl md:text-4xl font-light mb-16 tracking-tight" style="font-family: 'Playfair Display', serif;">Holistic Grooming</h2>
+      <div class="grid md:grid-cols-3 gap-12">
+        <div class="p-8 border border-white/10 hover:border-british-red transition duration-500">
+          <h3 class="text-xl font-light mb-4 text-british-red uppercase tracking-widest">Intellectual</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">Expanding horizons through a curriculum that encourages critical thinking and curiosity.</p>
+        </div>
+        <div class="p-8 border border-white/10 hover:border-british-red transition duration-500">
+          <h3 class="text-xl font-light mb-4 text-british-red uppercase tracking-widest">Moral & Islamic</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">Intrinsic values integrated into daily life, fostering character and spiritual depth.</p>
+        </div>
+        <div class="p-8 border border-white/10 hover:border-british-red transition duration-500">
+          <h3 class="text-xl font-light mb-4 text-british-red uppercase tracking-widest">Social & Physical</h3>
+          <p class="text-gray-300 text-sm leading-relaxed">Rounding the personality through collaborative sports, arts, and community leadership.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-24 bg-gray-50">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-16">
+        <h2 class="text-4xl font-light text-navy tracking-tight" style="font-family: 'Playfair Display', serif;">Academic Programs</h2>
+        <div class="w-12 h-px bg-british-red mx-auto mt-4"></div>
+      </div>
+
+      <div class="flex flex-wrap justify-center gap-8 mb-16 border-b border-gray-200">
+        <button data-action="click->about#switchTab" data-tab="eces" data-about-target="tab" class="pb-4 text-sm font-semibold tracking-widest uppercase border-b-2 border-british-red text-navy transition-all duration-300 cursor-pointer">ECES (Early Years)</button>
+        <button data-action="click->about#switchTab" data-tab="matric" data-about-target="tab" class="pb-4 text-sm font-semibold tracking-widest uppercase border-b-2 border-transparent text-gray-400 hover:text-navy transition-all duration-300 cursor-pointer">Matriculation</button>
+        <button data-action="click->about#switchTab" data-tab="hifz" data-about-target="tab" class="pb-4 text-sm font-semibold tracking-widest uppercase border-b-2 border-transparent text-gray-400 hover:text-navy transition-all duration-300 cursor-pointer">Hifz-Ul-Quran</button>
+      </div>
+
+      <div class="bg-white p-8 md:p-12 shadow-sm min-h-[400px]">
+        <div id="eces" data-about-target="content" class="transition-opacity duration-500">
+          <div class="grid md:grid-cols-2 gap-12 items-start">
+            <div>
+              <h3 class="text-2xl font-light text-navy mb-6" style="font-family: 'Playfair Display', serif;">Early Childhood Education Stage</h3>
+              <p class="text-gray-600 leading-relaxed mb-6">
+                The early years are crucial. We focus on individual learning, laying foundations to ensure children are happy, confident, and secure. Our curriculum goes beyond the classroom to support emotional, physical, and creative growth.
+              </p>
+              <div class="space-y-2 border-l-2 border-gray-100 pl-6">
+                <p class="text-sm font-medium text-navy">Year 1: Reception</p>
+                <p class="text-sm font-medium text-navy">Year 2: Prep — I</p>
+                <p class="text-sm font-medium text-navy">Year 3: Prep — II</p>
+              </div>
+            </div>
+            <div class="space-y-6">
+              <div class="bg-gray-50 p-6">
+                <h4 class="text-british-red text-xs font-bold tracking-widest uppercase mb-2">The Philosophy</h4>
+                <p class="text-gray-600 text-sm italic">"Traditional yet Innovative. We provide a rounded education where academic and Islamic elements are intrinsic."</p>
+              </div>
+              <ul class="text-sm text-gray-500 space-y-3">
+                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-british-red rounded-full mr-3"></span> International Curriculum</li>
+                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-british-red rounded-full mr-3"></span> Co-curricular Enrichement</li>
+                <li class="flex items-center"><span class="w-1.5 h-1.5 bg-british-red rounded-full mr-3"></span> Emotional & Social Grooming</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+
+        <div id="matric" data-about-target="content" class="hidden transition-opacity duration-500">
+          <div class="max-w-3xl">
+            <h3 class="text-2xl font-light text-navy mb-6" style="font-family: 'Playfair Display', serif;">Matriculation Excellence</h3>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              With 25 years of matchless success, Britain Group employs a unique blend of traditional and modern techniques. Our pre-9th session provides a competitive edge, affording students more time to master the board requirements.
+            </p>
+            <div class="grid grid-cols-2 gap-4">
+              <div class="p-4 bg-navy text-white text-center">
+                <p class="text-xs tracking-widest uppercase opacity-70">Faculty</p>
+                <p class="text-lg font-light">Exceptionally Competent</p>
+              </div>
+              <div class="p-4 bg-british-red text-white text-center">
+                <p class="text-xs tracking-widest uppercase opacity-70">Methodology</p>
+                <p class="text-lg font-light">Avant Garde</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div id="hifz" data-about-target="content" class="hidden transition-opacity duration-500">
+          <div class="max-w-3xl">
+            <h3 class="text-2xl font-light text-navy mb-6" style="font-family: 'Playfair Display', serif;">Hifz-Ul-Quran</h3>
+            <p class="text-gray-600 leading-relaxed">
+              Our specialized Hifz program is integrated with modern academics (KS1-KS3), ensuring that students do not fall behind in their formal education while they pursue the sacred journey of memorizing the Holy Quran.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-20 bg-white border-t border-gray-100">
+    <div class="max-w-4xl mx-auto text-center px-4">
+      <h2 class="text-3xl font-light text-navy mb-8" style="font-family: 'Playfair Display', serif;">Ready to join our community?</h2>
+      <div class="flex flex-col md:flex-row justify-center gap-4">
+        <%= link_to "View Admissions", new_inquiry_path, class: "bg-navy text-white px-12 py-4 rounded-full text-sm font-semibold tracking-widest hover:bg-navy/90 transition" %>
+        <%= link_to "Contact Us", new_inquiry_path, class: "border border-navy text-navy px-12 py-4 rounded-full text-sm font-semibold tracking-widest hover:bg-navy hover:text-white transition" %>
+      </div>
+    </div>
+  </section>
+</div>
