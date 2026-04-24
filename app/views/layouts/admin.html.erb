@@ -9,7 +9,7 @@
   <%= javascript_importmap_tags %>
 </head>
 <body class="bg-gray-100">
-  <nav class="bg-navy text-white sticky top-0 z-50 shadow-md border-b border-white/5 transition-all duration-300">
+  <nav class="bg-navy text-white sticky top-0 z-50 shadow-md border-b border-white/5 transition-all duration-300" data-controller="menu">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
       <div class="flex justify-between items-center py-4 md:py-5">
         
@@ -35,16 +35,51 @@
           <% end %>
         </div>
         
-        <div class="flex items-center">
-          <%= button_to destroy_admin_user_session_path, method: :delete, 
-              class: "bg-british-red px-7 py-2.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-[15px] font-semibold shadow-md tracking-wider text-white flex items-center gap-2 cursor-pointer" do %>
-            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+        <div class="flex items-center space-x-4">
+          <div class="hidden lg:block">
+            <%= button_to destroy_admin_user_session_path, method: :delete, 
+                class: "bg-british-red px-7 py-2.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-[15px] font-semibold shadow-md tracking-wider text-white flex items-center gap-2 cursor-pointer" do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+              <span>Logout</span>
+            <% end %>
+          </div>
+
+          <button data-action="click->menu#toggle" class="lg:hidden p-2 text-gray-200 hover:text-british-red transition-colors focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
             </svg>
-            <span class="hidden sm:inline">Logout</span>
-          <% end %>
+          </button>
         </div>
         
+      </div>
+
+      <!-- Mobile Menu -->
+      <div data-menu-target="content" class="hidden lg:hidden border-t border-white/10 pb-6 transition-all duration-300">
+        <div class="flex flex-col space-y-4 pt-4">
+          <% [
+            ['Dashboard', admin_root_path],
+            ['Posts', admin_posts_path],
+            ['Albums', admin_albums_path],
+            ['Campuses', admin_campu_index_path],
+            ['Inquiries', admin_inquiries_path],
+            ['News', admin_news_index_path]
+          ].each do |name, path| %>
+            <%= link_to name, path, 
+                class: "text-lg font-medium tracking-wide hover:text-british-red transition-colors #{current_page?(path) || (name != 'Dashboard' && request.path.include?(name.downcase.singularize)) ? 'text-british-red' : 'text-gray-100'}" %>
+          <% end %>
+
+          <div class="pt-4">
+            <%= button_to destroy_admin_user_session_path, method: :delete, 
+                class: "bg-british-red w-full text-center px-7 py-3 rounded-full text-base font-semibold tracking-wider text-white shadow-md hover:bg-red-700 transition-colors flex items-center justify-center gap-2 cursor-pointer" do %>
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+              </svg>
+              <span>Logout</span>
+            <% end %>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
