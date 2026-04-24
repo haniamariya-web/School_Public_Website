@@ -2,6 +2,8 @@ class News < ApplicationRecord
   # Active Storage
   has_one_attached :image
   has_one_attached :video
+
+  belongs_to :campus, class_name: 'Campu', optional: true
   
   validates :title, presence: true
   

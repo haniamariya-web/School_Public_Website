@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_000521) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -113,11 +113,13 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_000521) do
   end
 
   create_table "news", force: :cascade do |t|
+    t.bigint "campus_id"
     t.text "content"
     t.datetime "created_at", null: false
     t.datetime "published_at"
     t.string "title"
     t.datetime "updated_at", null: false
+    t.index ["campus_id"], name: "index_news_on_campus_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -149,6 +151,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_000521) do
   add_foreign_key "album_posts", "albums"
   add_foreign_key "album_posts", "posts"
   add_foreign_key "albums", "campus", column: "campus_id"
+  add_foreign_key "news", "campus", column: "campus_id"
   add_foreign_key "posts", "campus", column: "campus_id"
   add_foreign_key "results", "campus", column: "campus_id"
 end

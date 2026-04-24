@@ -1,7 +1,7 @@
 import { Controller } from "@hotwired/stimulus"
 
 export default class extends Controller {
-  static targets = ["modal", "backdrop", "panel", "title", "date", "content", "mediaContainer", "image", "video"]
+  static targets = ["modal", "backdrop", "panel", "title", "date", "campus", "content", "mediaContainer", "image", "video"]
 
   connect() {
     this.boundHandleKeydown = this.handleKeydown.bind(this)
@@ -18,6 +18,19 @@ export default class extends Controller {
     // Populate text data
     if (this.hasTitleTarget) this.titleTarget.textContent = params.newsModalTitleParam
     if (this.hasDateTarget) this.dateTarget.textContent = params.newsModalDateParam
+    
+    // Handle campus display
+    if (this.hasCampusTarget) {
+      if (params.newsModalCampusParam && params.newsModalCampusParam !== "") {
+        this.campusTarget.textContent = params.newsModalCampusParam
+        this.campusTarget.classList.remove("hidden")
+        if (this.campusTarget.previousElementSibling) this.campusTarget.previousElementSibling.classList.remove("hidden")
+      } else {
+        this.campusTarget.classList.add("hidden")
+        if (this.campusTarget.previousElementSibling) this.campusTarget.previousElementSibling.classList.add("hidden")
+      }
+    }
+
     if (this.hasContentTarget) this.contentTarget.textContent = params.newsModalContentParam
     
     // Reset media
