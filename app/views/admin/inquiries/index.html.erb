@@ -1,40 +1,82 @@
-<h1 class="text-3xl font-bold text-navy mb-6">Inquiries</h1>
+<div class="min-h-screen bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+    <!-- Header -->
+    <div class="mb-8">
+      <h1 class="text-4xl font-light text-navy mb-2" style="font-family: 'Playfair Display', serif;">Inquiries</h1>
+      <p class="text-gray-600">Manage all contact inquiries and admissions requests</p>
+      <div class="w-20 h-1 bg-british-red mt-4"></div>
+    </div>
 
-<div class="bg-white rounded shadow overflow-hidden">
-  <table class="min-w-full">
-    <thead class="bg-gray-200">
-      <tr>
-        <th class="px-6 py-3 text-left">Name</th>
-        <th class="px-6 py-3 text-left">Email</th>
-        <th class="px-6 py-3 text-left">Phone</th>
-        <th class="px-6 py-3 text-left">Grade Level</th>
-        <th class="px-6 py-3 text-left">Submitted</th>
-        <th class="px-6 py-3 text-left">Status</th>
-        <th class="px-6 py-3 text-left">Actions</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @inquiries.each do |inquiry| %>
-        <tr class="border-t">
-          <td class="px-6 py-4"><%= inquiry.name %></td>
-          <td class="px-6 py-4"><%= inquiry.email %></td>
-          <td class="px-6 py-4"><%= inquiry.phone %></td>
-          <td class="px-6 py-4"><%= inquiry.grade_level %></td>
-          <td class="px-6 py-4"><%= inquiry.created_at.strftime("%b %d, %Y") %></td>
-          <td class="px-6 py-4">
-            <% if inquiry.status == 1 %>
-              <span class="bg-green-100 text-green-700 px-2 py-1 rounded">Contacted</span>
-            <% else %>
-              <span class="bg-yellow-100 text-yellow-700 px-2 py-1 rounded">Pending</span>
+    <!-- Stats Bar -->
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
+      <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-british-red">
+        <p class="text-gray-600 text-sm font-medium">Total Inquiries</p>
+        <p class="text-3xl font-bold text-navy mt-1"><%= @inquiries.count %></p>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-yellow-500">
+        <p class="text-gray-600 text-sm font-medium">Pending</p>
+        <p class="text-3xl font-bold text-yellow-600 mt-1"><%= @pending_count %></p>
+      </div>
+      <div class="bg-white rounded-lg shadow-sm p-4 border-l-4 border-green-600">
+        <p class="text-gray-600 text-sm font-medium">Contacted</p>
+        <p class="text-3xl font-bold text-green-600 mt-1"><%= @contacted_count %></p>
+      </div>
+    </div>
+
+    <!-- Inquiries Table -->
+    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+      <% if @inquiries.any? %>
+        <table class="min-w-full">
+          <thead class="bg-gray-50 border-b border-gray-200">
+            <tr>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Name</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Email</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Phone</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Grade</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Submitted</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Status</th>
+              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Action</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <% @inquiries.each do |inquiry| %>
+              <tr class="hover:bg-gray-50 transition">
+                <td class="px-6 py-4 text-sm font-medium text-gray-900"><%= inquiry.name %></td>
+                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.email %></td>
+                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.phone %></td>
+                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.grade_level %></td>
+                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.created_at.strftime("%b %d, %Y") %></td>
+                <td class="px-6 py-4 text-sm">
+                  <% if inquiry.contacted? %>
+                    <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
+                      Contacted
+                    </span>
+                  <% else %>
+                    <span class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">
+                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
+                      Pending
+                    </span>
+                  <% end %>
+                </td>
+                <td class="px-6 py-4 text-sm">
+                  <% if !inquiry.contacted? %>
+                    <%= button_to "Mark Contacted", mark_contacted_admin_inquiry_path(inquiry), method: :patch, class: "bg-british-red hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-semibold transition" %>
+                  <% end %>
+                </td>
+              </tr>
             <% end %>
-          </td>
-          <td class="px-6 py-4">
-            <% if inquiry.status != 1 %>
-              <%= button_to "Mark Contacted", mark_contacted_admin_inquiry_path(inquiry), method: :patch, class: "bg-british-red text-white px-3 py-1 rounded hover:bg-red-700" %>
-            <% end %>
-          </td>
-        </tr>
+          </tbody>
+        </table>
+      <% else %>
+        <div class="text-center py-12">
+          <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path>
+          </svg>
+          <p class="text-gray-500 text-lg font-medium">No inquiries yet</p>
+          <p class="text-gray-400 text-sm mt-1">Inquiries will appear here when submitted</p>
+        </div>
       <% end %>
-    </tbody>
-  </table>
+    </div>
+  </div>
 </div>
