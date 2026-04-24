@@ -1,24 +1,57 @@
- <nav class="bg-navy text-white sticky top-0 z-50 shadow-lg">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-center h-16">
-        <%= link_to root_path, class: "flex items-center space-x-2" do %>
-          <span class="text-2xl font-bold text-british-red">BIS</span>
-          <span class="text-sm font-light tracking-wide">Britain International School<br><span class="text-xs">Al-Muqeet Campus</span></span>
+<% if current_page?(root_path) && (recent_news = News.published.limit(3)).any? %>
+  <div class="bg-yellow-300 text-navy py-1.5 overflow-hidden whitespace-nowrap border-b border-yellow-400 relative z-50">
+    <div class="inline-block animate-marquee text-xs md:text-sm font-semibold tracking-wide">
+      <span class="mr-4 font-bold uppercase text-british-red">Latest News:</span>
+      <% recent_news.each_with_index do |news_item, index| %>
+        <%= link_to news_item.title, news_index_path, class: "hover:text-british-red transition-colors" %>
+        <% if index < recent_news.size - 1 %>
+          <span class="mx-3 opacity-50">•</span>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+  <style>
+    @keyframes marquee {
+      0% { transform: translateX(100vw); }
+      100% { transform: translateX(-100%); }
+    }
+    .animate-marquee {
+      animation: marquee 29.3s linear infinite;
+      /* removed padding-left to fix the start delay */
+    }
+    .animate-marquee:hover {
+      animation-play-state: paused;
+    }
+  </style>
+<% end %>
+
+<nav class="bg-navy text-white sticky top-0 z-50 shadow-md border-b border-white/5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
+      <div class="flex justify-between items-center py-4 md:py-5">
+        
+        <!-- Logo -->
+        <%= link_to root_path, class: "flex items-center space-x-3 group" do %>
+          <span class="text-3xl md:text-4xl text-british-red font-playfair tracking-tight group-hover:text-red-500 transition-colors">BIS</span>
+          <span class="text-[15px] font-light tracking-wider leading-snug border-l border-white/20 pl-3 hidden sm:block text-gray-200">
+            Britain International School<br>
+            <span class="text-xs font-medium text-gray-400">Al-Muqeet Campus</span>
+          </span>
         <% end %>
         
-        <div class="hidden md:flex space-x-8">
-          <%= link_to "About", about_path, class: "hover:text-british-red transition text-sm tracking-wide" %>
-          <%= link_to "Campuses", campuses_path, class: "hover:text-british-red transition text-sm tracking-wide" %>
-          <%= link_to "News", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
-          <%= link_to "Gallery", gallery_path, class: "hover:text-british-red transition text-sm tracking-wide" %>
-          <%= link_to "Contact Us", "#", class: "hover:text-british-red transition text-sm tracking-wide" %>
-          <%=link_to "Admin Portal", admin_root_path, class: "hover:text-british-red transition text-sm tracking-wide" %>
+        <!-- Links -->
+        <div class="hidden lg:flex items-center space-x-8">
+          <%= link_to "About", about_path, class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
+          <%= link_to "Campuses", campuses_path, class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
+          <%= link_to "News", news_index_path, class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
+          <%= link_to "Gallery", gallery_path, class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
+          <%= link_to "Contact Us", current_page?(root_path) ? "#contact-us" : root_path(anchor: "contact-us"), class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
         </div>
         
-        <button class="bg-british-red px-6 py-2 rounded-full hover:bg-red-700 transition text-sm font-semibold shadow-md tracking-wide">
-          <%= link_to "Admissions Open", new_inquiry_path, class: "..." %>
-        </button>
+        <!-- CTA Button -->
+        <div class="flex items-center">
+          <%= link_to "Admissions Open", new_inquiry_path, class: "bg-british-red px-7 py-2.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-[15px] font-semibold shadow-md tracking-wider text-white" %>
+        </div>
+
       </div>
-      
     </div>
   </nav>

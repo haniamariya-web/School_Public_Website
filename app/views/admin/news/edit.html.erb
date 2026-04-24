@@ -1,0 +1,22 @@
+<h1 class="text-3xl font-bold text-navy mb-6">Edit News</h1>
+
+<%= form_with model: [:admin, @news], local: true, html: { multipart: true, class: "bg-white p-6 rounded shadow" } do |f| %>
+  <% if @news.image.attached? %>
+    <div class="mb-4 p-3 bg-gray-50 rounded">
+      <p class="text-sm font-semibold mb-2">Current Image:</p>
+      <%= image_tag @news.image, class: "max-h-32 rounded" %>
+    </div>
+  <% end %>
+  <% if @news.video.attached? %>
+    <div class="mb-4 p-3 bg-gray-50 rounded">
+      <p class="text-sm font-semibold mb-2">Current Video:</p>
+      <video controls class="max-h-32"><source src="<%= url_for(@news.video) %>"></video>
+    </div>
+  <% end %>
+  
+  <%= render "form", f: f %>
+  <div class="flex gap-2">
+    <%= f.submit "Update News", class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+    <%= link_to "Cancel", admin_news_index_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+  </div>
+<% end %>

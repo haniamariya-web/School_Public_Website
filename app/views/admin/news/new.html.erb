@@ -1,0 +1,9 @@
+<h1 class="text-3xl font-bold text-navy mb-6">New News</h1>
+
+<%= form_with model: [:admin, @news], local: true, html: { multipart: true, class: "bg-white p-6 rounded shadow" } do |f| %>
+  <%= render "form", f: f %>
+  <div class="flex gap-2">
+    <%= f.submit "Create News", class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+    <%= link_to "Cancel", admin_news_index_path, class: "bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600" %>
+  </div>
+<% end %>

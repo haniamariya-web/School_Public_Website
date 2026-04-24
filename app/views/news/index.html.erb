@@ -1,0 +1,111 @@
+<div class="min-h-screen bg-gray-50" data-controller="campuses news-modal">
+  <!-- Hero Section -->
+  <section class="relative h-[300px] md:h-[400px] flex items-center justify-center bg-navy overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-navy to-[#001530]"></div>
+    
+    <!-- Decorative elements -->
+    <div class="absolute top-0 left-0 w-full h-full overflow-hidden opacity-10 pointer-events-none">
+      <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full border-[1px] border-white/20"></div>
+      <div class="absolute top-1/2 right-12 w-64 h-64 rounded-full border-[1px] border-white/20"></div>
+    </div>
+
+    <div class="relative text-center px-4 max-w-4xl mx-auto reveal opacity-0 translate-y-10 transition duration-1000">
+      <p class="text-xs tracking-widest text-british-red mb-4 uppercase font-semibold">Latest Updates</p>
+      <h1 class="text-4xl md:text-6xl font-light text-white mb-4 tracking-tight font-playfair">School News</h1>
+      <div class="w-20 h-1 bg-british-red mx-auto mb-8"></div>
+      <p class="text-gray-300 max-w-2xl mx-auto text-sm md:text-base font-light tracking-wide">
+        Stay informed about the latest happenings, announcements, and achievements at Britain International School.
+      </p>
+    </div>
+  </section>
+
+  <!-- Main Content Layout -->
+  <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+    <% if @news.any? %>
+      <div class="space-y-6">
+        <% @news.each_with_index do |news_item, index| %>
+          <div class="bg-white rounded-sm shadow-sm hover:shadow-lg transition-all duration-300 border border-gray-100 overflow-hidden reveal opacity-0 translate-y-10 transition duration-1000 cursor-pointer flex flex-col md:flex-row group" 
+               data-action="click->news-modal#open"
+               data-news-modal-title-param="<%= j news_item.title %>"
+               data-news-modal-date-param="<%= news_item.published_at.strftime('%B %d, %Y') %>"
+               data-news-modal-content-param="<%= j news_item.content.to_s %>"
+               data-news-modal-has-media-param="<%= news_item.image.attached? || news_item.video.attached? %>"
+               <% if news_item.image.attached? %>
+                 data-news-modal-image-url-param="<%= url_for(news_item.image) %>"
+               <% elsif news_item.video.attached? %>
+                 data-news-modal-video-url-param="<%= url_for(news_item.video) %>"
+               <% end %>>
+            
+            <div class="p-6 md:p-8 flex-grow">
+              <div class="flex items-center gap-3 mb-3 text-xs font-semibold tracking-wider text-gray-400 uppercase">
+                <svg class="w-4 h-4 text-british-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+                <span><%= news_item.published_at.strftime("%B %d, %Y") %></span>
+              </div>
+              <h3 class="text-xl md:text-2xl font-light text-navy mb-4 font-playfair group-hover:text-british-red transition-colors"><%= news_item.title %></h3>
+              <p class="text-gray-500 text-sm leading-relaxed line-clamp-2"><%= news_item.content %></p>
+              
+              <div class="mt-6 flex items-center gap-2 text-sm font-medium text-navy group-hover:text-british-red transition-colors">
+                <span>Read Full Story</span>
+                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+              </div>
+            </div>
+            
+            <!-- Optional thumbnail preview in the list -->
+            <% if news_item.image.attached? %>
+              <div class="hidden md:block w-48 lg:w-64 flex-shrink-0 bg-gray-100">
+                <%= image_tag news_item.image, class: "w-full h-full object-cover" %>
+              </div>
+            <% elsif news_item.video.attached? %>
+              <div class="hidden md:block w-48 lg:w-64 flex-shrink-0 bg-navy relative flex items-center justify-center">
+                <svg class="w-12 h-12 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    <% else %>
+      <div class="bg-white p-16 text-center shadow-sm border border-gray-100 rounded-sm reveal opacity-0 translate-y-10 transition duration-1000">
+        <svg class="w-16 h-16 mx-auto text-gray-300 mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z"></path></svg>
+        <h3 class="text-xl font-light text-navy font-playfair mb-2">No News Yet</h3>
+        <p class="text-gray-500">Check back soon for the latest updates and announcements.</p>
+      </div>
+    <% end %>
+  </div>
+
+  <!-- Modal Overlay -->
+  <div id="news-modal" data-news-modal-target="modal" class="fixed inset-0 z-[100] hidden flex items-center justify-center p-4 sm:p-6" aria-labelledby="modal-title" role="dialog" aria-modal="true">
+    <!-- Backdrop -->
+    <div data-news-modal-target="backdrop" data-action="click->news-modal#close" class="fixed inset-0 bg-navy/80 backdrop-blur-sm transition-opacity opacity-0 duration-300"></div>
+
+    <!-- Modal Panel -->
+    <div data-news-modal-target="panel" class="relative bg-white rounded-sm shadow-2xl overflow-hidden transform transition-all opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95 duration-300 w-full max-w-4xl max-h-[90vh] flex flex-col">
+      
+      <!-- Close Button -->
+      <button data-action="click->news-modal#close" class="absolute top-4 right-4 z-20 w-10 h-10 bg-black/20 hover:bg-british-red hover:text-white rounded-full flex items-center justify-center text-white transition-colors backdrop-blur-md">
+        <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
+      </button>
+
+      <!-- Scrollable Content -->
+      <div class="overflow-y-auto">
+        <!-- Media Container (Hidden if no media) -->
+        <div data-news-modal-target="mediaContainer" class="hidden w-full bg-navy flex justify-center border-b border-gray-100 relative">
+          <img data-news-modal-target="image" src="" class="hidden max-w-full max-h-[500px] object-contain" />
+          <video data-news-modal-target="video" src="" controls class="hidden max-w-full max-h-[500px]"></video>
+        </div>
+
+        <!-- Content Area -->
+        <div class="p-8 sm:p-12">
+          <div class="flex items-center gap-3 mb-6 text-sm font-semibold tracking-wider text-british-red uppercase">
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
+            <span data-news-modal-target="date">Date</span>
+          </div>
+          <h2 data-news-modal-target="title" class="text-3xl sm:text-4xl font-light text-navy mb-8 font-playfair leading-tight">Title</h2>
+          
+          <div class="prose prose-lg prose-gray max-w-none text-gray-600 font-light leading-relaxed whitespace-pre-line" data-news-modal-target="content">
+            Content goes here...
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,24 @@
+<div class="mb-4">
+  <%= f.label :title, class: "block text-navy font-semibold mb-2" %>
+  <%= f.text_field :title, class: "w-full border border-gray-300 rounded p-2" %>
+</div>
+
+<div class="mb-4">
+  <%= f.label :content, class: "block text-navy font-semibold mb-2" %>
+  <%= f.text_area :content, rows: 8, class: "w-full border border-gray-300 rounded p-2" %>
+</div>
+
+<div class="mb-4">
+  <%= f.label :published_at, class: "block text-navy font-semibold mb-2" %>
+  <%= f.datetime_local_field :published_at, class: "w-full border border-gray-300 rounded p-2" %>
+</div>
+
+<div class="mb-4">
+  <%= f.label :image, "Image (optional)", class: "block text-navy font-semibold mb-2" %>
+  <%= f.file_field :image, accept: "image/png,image/jpeg,image/jpg", class: "w-full border border-gray-300 rounded p-2" %>
+</div>
+
+<div class="mb-4">
+  <%= f.label :video, "Video (optional)", class: "block text-navy font-semibold mb-2" %>
+  <%= f.file_field :video, accept: "video/mp4", class: "w-full border border-gray-300 rounded p-2" %>
+</div>

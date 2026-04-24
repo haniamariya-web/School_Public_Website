@@ -7,23 +7,49 @@
   <%= csp_meta_tag %>
   <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
   <%= javascript_importmap_tags %>
-  <%# <link href="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/css/tom-select.css" rel="stylesheet"> %>
-  <%# <script src="https://cdn.jsdelivr.net/npm/tom-select@2.3.1/dist/js/tom-select.complete.min.js"></script> %>
-  <%# <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/choices.js/public/assets/styles/choices.min.css"> %>
-  <%# <script src="https://cdn.jsdelivr.net/npm/choices.js/public/assets/scripts/choices.min.js"></script> %>
 </head>
 <body class="bg-gray-100">
-  <nav class="bg-navy text-white p-4 flex justify-between items-center">
-    <div class="flex gap-6">
-      <%= link_to "Dashboard", admin_root_path, class: "hover:text-british-red" %>
-      <%= link_to "Posts", admin_posts_path, class: "hover:text-british-red" %>
-      <%= link_to "Campuses", admin_campu_index_path, class: "hover:text-british-red" %>
-      <%= link_to "Inquiries", admin_inquiries_path, class: "hover:text-british-red" %>
-      <%= link_to "Albums", admin_albums_path, class: "hover:text-british-red" %>
+  <nav class="bg-navy text-white sticky top-0 z-50 shadow-md border-b border-white/5 transition-all duration-300">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
+      <div class="flex justify-between items-center py-4 md:py-5">
+        
+        <%= link_to root_path, class: "flex items-center space-x-3 group" do %>
+          <span class="text-3xl md:text-4xl text-british-red font-playfair tracking-tight group-hover:text-red-500 transition-colors">BIS</span>
+          <span class="text-[15px] font-light tracking-wider leading-snug border-l border-white/20 pl-3 hidden sm:block text-gray-200">
+            Britain International School<br>
+            <span class="text-xs font-medium text-gray-400">Admin Portal</span>
+          </span>
+        <% end %>
+        
+        <div class="hidden lg:flex items-center space-x-6">
+          <% [
+            ['Dashboard', admin_root_path],
+            ['Posts', admin_posts_path],
+            ['Albums', admin_albums_path],
+            ['Campuses', admin_campu_index_path],
+            ['Inquiries', admin_inquiries_path],
+            ['News', admin_news_index_path]
+          ].each do |name, path| %>
+            <%= link_to name, path, 
+                class: "transition-all duration-300 text-[15px] font-medium tracking-wide pb-1 border-b-2 #{current_page?(path) || (name != 'Dashboard' && request.path.include?(name.downcase.singularize)) ? 'border-british-red text-white' : 'border-transparent text-gray-300 hover:text-british-red'}" %>
+          <% end %>
+        </div>
+        
+        <div class="flex items-center">
+          <%= button_to destroy_admin_user_session_path, method: :delete, 
+              class: "bg-british-red px-7 py-2.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-[15px] font-semibold shadow-md tracking-wider text-white flex items-center gap-2 cursor-pointer" do %>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"></path>
+            </svg>
+            <span class="hidden sm:inline">Logout</span>
+          <% end %>
+        </div>
+        
+      </div>
     </div>
-    <%= button_to "Logout", destroy_admin_user_session_path, method: :delete, class: "bg-british-red px-4 py-2 rounded hover:bg-red-700" %>
   </nav>
-  <main class="p-6">
+
+  <main class="p-8 max-w-7xl mx-auto">
     <%= yield %>
   </main>
 </body>

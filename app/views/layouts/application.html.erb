@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="scroll-smooth">
   <head>
     <title><%= content_for(:title) || "School2" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -26,5 +26,6 @@
   <body>
     <%= render "shared/navbar" %>
     <%= yield %>
+    <%= render "shared/footer" %>
   </body>
 </html>

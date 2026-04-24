@@ -1,0 +1,37 @@
+<div class="flex justify-between items-center mb-6">
+  <h1 class="text-3xl font-bold text-navy">News</h1>
+  <%= link_to "New News", new_admin_news_path, class: "bg-british-red text-white px-4 py-2 rounded hover:bg-red-700" %>
+</div>
+
+<div class="bg-white rounded shadow overflow-hidden">
+  <table class="min-w-full">
+    <thead class="bg-gray-200">
+      <tr>
+        <th class="px-6 py-3 text-left">Title</th>
+        <th class="px-6 py-3 text-left">Media</th>
+        <th class="px-6 py-3 text-left">Published</th>
+        <th class="px-6 py-3 text-left">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @news.each do |item| %>
+        <tr class="border-t">
+          <td class="px-6 py-4"><%= item.title %></td>
+          <td class="px-6 py-4">
+            <% if item.image.attached? %>
+              <span class="text-blue-600">�� Image</span>
+            <% elsif item.video.attached? %>
+              <span class="text-purple-600">🎥 Video</span>
+            <% else %>
+              <span class="text-gray-400">None</span>
+            <% end %>
+          </td>
+          <td class="px-6 py-4"><%= item.published_at&.strftime("%b %d, %Y") || "Draft" %></td>
+          <td class="px-6 py-4">
+            <%= link_to "Edit", edit_admin_news_path(item), class: "text-navy hover:underline mr-2" %>
+            <%= button_to "Delete", admin_news_path(item), method: :delete, class: "text-red-600 hover:underline", data: { turbo_confirm: "Are you sure?" } %>
+          </td>
+        </tr>
+      <% end %>
+    </tbody>
+</div>
