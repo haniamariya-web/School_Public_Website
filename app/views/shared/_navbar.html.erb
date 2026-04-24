@@ -11,25 +11,16 @@
     </div>
   </div>
   <style>
-    @keyframes marquee {
-      0% { transform: translateX(100vw); }
-      100% { transform: translateX(-100%); }
-    }
-    .animate-marquee {
-      animation: marquee 29.3s linear infinite;
-      /* removed padding-left to fix the start delay */
-    }
-    .animate-marquee:hover {
-      animation-play-state: paused;
-    }
+    @keyframes marquee { 0% { transform: translateX(100vw); } 100% { transform: translateX(-100%); } }
+    .animate-marquee { animation: marquee 29.3s linear infinite; }
+    .animate-marquee:hover { animation-play-state: paused; }
   </style>
 <% end %>
 
-<nav class="bg-navy text-white sticky top-0 z-50 shadow-md border-b border-white/5 transition-all duration-300">
+<nav class="bg-navy text-white sticky top-0 z-50 shadow-md border-b border-white/5 transition-all duration-300" data-controller="menu">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-6">
       <div class="flex justify-between items-center py-4 md:py-5">
         
-        <!-- Logo -->
         <%= link_to root_path, class: "flex items-center space-x-3 group" do %>
           <span class="text-3xl md:text-4xl text-british-red font-playfair tracking-tight group-hover:text-red-500 transition-colors">BIS</span>
           <span class="text-[15px] font-light tracking-wider leading-snug border-l border-white/20 pl-3 hidden sm:block text-gray-200">
@@ -38,7 +29,6 @@
           </span>
         <% end %>
         
-        <!-- Links -->
         <div class="hidden lg:flex items-center space-x-8">
           <%= link_to "About", about_path, class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
           <%= link_to "Campuses", campuses_path, class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
@@ -47,11 +37,31 @@
           <%= link_to "Contact Us", current_page?(root_path) ? "#contact-us" : root_path(anchor: "contact-us"), class: "hover:text-british-red transition-colors text-base font-medium tracking-wide text-gray-100" %>
         </div>
         
-        <!-- CTA Button -->
-        <div class="flex items-center">
-          <%= link_to "Admissions Open", new_inquiry_path, class: "bg-british-red px-7 py-2.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-[15px] font-semibold shadow-md tracking-wider text-white" %>
-        </div>
+        <div class="flex items-center space-x-4">
+          <div class="hidden lg:block">
+            <%= link_to "Admissions Open", new_inquiry_path, class: "bg-british-red px-7 py-2.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-0.5 transform transition-all duration-300 text-[15px] font-semibold shadow-md tracking-wider text-white" %>
+          </div>
 
+          <button data-action="click->menu#toggle" class="lg:hidden p-2 text-gray-200 hover:text-british-red transition-colors focus:outline-none">
+            <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div data-menu-target="content" class="hidden lg:hidden border-t border-white/10 pb-6 transition-all duration-300">
+        <div class="flex flex-col space-y-4 pt-4">
+          <%= link_to "About", about_path, class: "text-lg font-medium tracking-wide text-gray-100 hover:text-british-red" %>
+          <%= link_to "Campuses", campuses_path, class: "text-lg font-medium tracking-wide text-gray-100 hover:text-british-red" %>
+          <%= link_to "News", news_index_path, class: "text-lg font-medium tracking-wide text-gray-100 hover:text-british-red" %>
+          <%= link_to "Gallery", gallery_path, class: "text-lg font-medium tracking-wide text-gray-100 hover:text-british-red" %>
+          <%= link_to "Contact Us", current_page?(root_path) ? "#contact-us" : root_path(anchor: "contact-us"), class: "text-lg font-medium tracking-wide text-gray-100 hover:text-british-red" %>
+          
+          <div class="pt-4">
+            <%= link_to "Admissions Open", new_inquiry_path, class: "bg-british-red inline-block w-full text-center px-7 py-3 rounded-full text-base font-semibold tracking-wider text-white shadow-md" %>
+          </div>
+        </div>
       </div>
     </div>
   </nav>

@@ -1,36 +1,36 @@
 <div class="min-h-screen bg-white" data-controller="reveal">
   <!-- Hero Carousel -->
   <div class="relative" data-controller="carousel" data-carousel-index-value="0">
-    <div class="relative h-[600px] md:h-[700px] overflow-hidden">
+    <div class="relative h-[450px] sm:h-[550px] md:h-[700px] overflow-hidden">
       
       <!-- Slide 1 - Classroom -->
       <div data-carousel-target="slide" class="absolute inset-0 bg-cover bg-center transition-all duration-1000 ease-in-out" style="background-image: linear-gradient(rgba(0,33,71,0.6), rgba(0,33,71,0.7)), url('https://images.unsplash.com/photo-1509062522246-3755977927d7?w=1600');">
         <div class="flex flex-col justify-center items-center h-full text-white text-center px-4">
-          <p class="text-yellow-300 text-lg tracking-wider mb-3 font-semibold uppercase">EST. 1955</p>
-          <h1 class="text-6xl md:text-8xl font-light mb-6 tracking-tight font-playfair transform transition-all duration-1000 translate-y-0">Nurturing Excellence</h1>
-          <p class="text-xl md:text-2xl mb-10 font-light max-w-2xl text-gray-200">Shaping the future through holistic education and character building.</p>
-          <%= link_to "Discover More", about_path, class: "bg-british-red px-10 py-3.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300 text-base font-semibold tracking-wide" %>
+          <p class="text-yellow-300 text-sm sm:text-lg tracking-wider mb-2 sm:mb-3 font-semibold uppercase">EST. 1955</p>
+          <h1 class="text-4xl sm:text-5xl md:text-8xl font-light mb-4 sm:mb-6 tracking-tight font-playfair transform transition-all duration-1000 translate-y-0">Nurturing Excellence</h1>
+          <p class="text-base sm:text-xl md:text-2xl mb-6 sm:mb-10 font-light max-w-2xl text-gray-200 px-2">Shaping the future through holistic education and character building.</p>
+          <%= link_to "Discover More", about_path, class: "bg-british-red px-8 sm:px-10 py-3 sm:py-3.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300 text-sm sm:text-base font-semibold tracking-wide" %>
         </div>
       </div>
 
       <!-- Slide 2 - Admissions -->
       <div data-carousel-target="slide" class="absolute inset-0 bg-cover bg-center hidden transition-all duration-1000 ease-in-out" style="background-image: linear-gradient(rgba(0,33,71,0.6), rgba(0,33,71,0.7)), url('https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=1600');">
         <div class="flex flex-col justify-center items-center h-full text-white text-center px-4">
-          <h1 class="text-6xl md:text-7xl font-light mb-6 tracking-tight font-playfair">Admissions Open</h1>
-          <p class="text-2xl md:text-3xl mb-4 font-light">Play Group to Matric & Hifz-Ul-Quran</p>
-          <div class="bg-black/30 backdrop-blur-sm border border-white/10 px-8 py-3 rounded-full mb-10">
-            <p class="text-lg md:text-xl text-yellow-300 font-medium tracking-wide">No Admission Fee • No Summer Vacation Fee</p>
+          <h1 class="text-4xl sm:text-5xl md:text-7xl font-light mb-4 sm:mb-6 tracking-tight font-playfair">Admissions Open</h1>
+          <p class="text-lg sm:text-2xl md:text-3xl mb-3 sm:mb-4 font-light px-2">Play Group to Matric & Hifz-Ul-Quran</p>
+          <div class="bg-black/30 backdrop-blur-sm border border-white/10 px-4 sm:px-8 py-2 sm:py-3 rounded-full mb-6 sm:mb-10 mx-2">
+            <p class="text-sm sm:text-lg md:text-xl text-yellow-300 font-medium tracking-wide">No Admission Fee • No Summer Vacation Fee</p>
           </div>
-          <%= link_to "Enroll Today", new_inquiry_path, class: "bg-british-red px-10 py-3.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300 text-base font-semibold tracking-wide" %>
+          <%= link_to "Enroll Today", new_inquiry_path, class: "bg-british-red px-8 sm:px-10 py-3 sm:py-3.5 rounded-full hover:bg-red-700 hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300 text-sm sm:text-base font-semibold tracking-wide" %>
         </div>
       </div>
 
       <!-- Slide 3 - Islamic Education -->
       <div data-carousel-target="slide" class="absolute inset-0 bg-cover bg-center hidden transition-all duration-1000 ease-in-out" style="background-image: linear-gradient(rgba(0,33,71,0.6), rgba(0,33,71,0.8)), url('https://images.unsplash.com/photo-1512820790803-83ca734da794?w=1600');">
         <div class="flex flex-col justify-center items-center h-full text-white text-center px-4">
-          <h1 class="text-6xl md:text-7xl font-light mb-6 tracking-tight font-playfair">Connecting Hearts</h1>
-          <p class="text-xl md:text-2xl mb-10 font-light max-w-2xl leading-relaxed">Specialized Hifz-Ul-Quran program seamlessly integrated with modern academics.</p>
-          <%= link_to "Learn More", about_path, class: "bg-white text-navy px-10 py-3.5 rounded-full hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300 text-base font-semibold tracking-wide" %>
+          <h1 class="text-4xl sm:text-5xl md:text-7xl font-light mb-4 sm:mb-6 tracking-tight font-playfair">Connecting Hearts</h1>
+          <p class="text-base sm:text-xl md:text-2xl mb-6 sm:mb-10 font-light max-w-2xl leading-relaxed px-2">Specialized Hifz-Ul-Quran program seamlessly integrated with modern academics.</p>
+          <%= link_to "Learn More", about_path, class: "bg-white text-navy px-8 sm:px-10 py-3 sm:py-3.5 rounded-full hover:bg-gray-100 hover:shadow-lg hover:-translate-y-1 transform transition-all duration-300 text-sm sm:text-base font-semibold tracking-wide" %>
         </div>
       </div>
     </div>
@@ -56,19 +56,19 @@
   </div>
 
   <!-- Stats Counter -->
-  <div class="bg-navy py-16 border-b-4 border-british-red relative z-10 -mt-2" data-controller="counter">
+  <div class="bg-navy py-10 sm:py-16 border-b-4 border-british-red relative z-10 -mt-2" data-controller="counter">
     <div class="max-w-7xl mx-auto px-4">
-      <div class="grid md:grid-cols-3 gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
+      <div class="grid md:grid-cols-3 gap-6 sm:gap-12 text-center divide-y md:divide-y-0 md:divide-x divide-white/10">
         <div class="reveal opacity-0 translate-y-10 transition-all duration-700">
-          <div class="text-5xl md:text-6xl font-light text-british-red mb-3 font-playfair" data-counter-target="number" data-counter-target-value="15000" data-counter-suffix-value="+">0</div>
+          <div class="text-4xl sm:text-5xl md:text-6xl font-light text-british-red mb-3 font-playfair" data-counter-target="number" data-counter-target-value="15000" data-counter-suffix-value="+">0</div>
           <p class="text-gray-300 text-sm md:text-base tracking-widest uppercase font-medium">Students Enrolled</p>
         </div>
         <div class="reveal opacity-0 translate-y-10 transition-all duration-700 delay-100 pt-8 md:pt-0">
-          <div class="text-5xl md:text-6xl font-light text-yellow-400 mb-3 font-playfair" data-counter-target="number" data-counter-target-value="40" data-counter-suffix-value="+">0</div>
+          <div class="text-4xl sm:text-5xl md:text-6xl font-light text-yellow-400 mb-3 font-playfair" data-counter-target="number" data-counter-target-value="40" data-counter-suffix-value="+">0</div>
           <p class="text-gray-300 text-sm md:text-base tracking-widest uppercase font-medium">Campuses Nationwide</p>
         </div>
         <div class="reveal opacity-0 translate-y-10 transition-all duration-700 delay-200 pt-8 md:pt-0">
-          <div class="text-5xl md:text-6xl font-light text-british-red mb-3 font-playfair" data-counter-target="number" data-counter-target-value="1000" data-counter-suffix-value="+">0</div>
+          <div class="text-4xl sm:text-5xl md:text-6xl font-light text-british-red mb-3 font-playfair" data-counter-target="number" data-counter-target-value="1000" data-counter-suffix-value="+">0</div>
           <p class="text-gray-300 text-sm md:text-base tracking-widest uppercase font-medium">Dedicated Faculty</p>
         </div>
       </div>
@@ -76,14 +76,14 @@
   </div>
 
   <!-- Mission Statement -->
-  <div class="py-24 bg-gray-50 relative overflow-hidden">
+  <div class="py-16 sm:py-24 bg-gray-50 relative overflow-hidden">
     <!-- Decorative background elements -->
     <div class="absolute top-0 right-0 -mt-20 -mr-20 w-80 h-80 bg-navy/5 rounded-full blur-3xl pointer-events-none"></div>
     <div class="absolute bottom-0 left-0 -mb-20 -ml-20 w-80 h-80 bg-british-red/5 rounded-full blur-3xl pointer-events-none"></div>
     
     <div class="max-w-4xl mx-auto px-4 text-center reveal opacity-0 scale-95 transition-all duration-1000 relative z-10">
       <svg class="w-12 h-12 text-british-red/30 mx-auto mb-6" fill="currentColor" viewBox="0 0 24 24"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10h-9.983zm-14.017 0v-7.391c0-5.704 3.748-9.57 9-10.609l.996 2.151c-2.433.917-3.996 3.638-3.996 5.849h3.983v10h-9.983z"/></svg>
-      <p class="text-navy text-3xl md:text-4xl lg:text-5xl font-light leading-snug font-playfair italic mb-8">
+      <p class="text-navy text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-light leading-snug font-playfair italic mb-8">
         "A unique combination of Modern & Islamic Education empowering the leaders of tomorrow."
       </p>
       <div class="w-24 h-1 bg-gradient-to-r from-transparent via-british-red to-transparent mx-auto"></div>
@@ -91,15 +91,15 @@
   </div>
 
   <!-- Why Choose Us -->
-  <div class="py-24 bg-white">
+  <div class="py-16 sm:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 reveal opacity-0 translate-y-10 transition-all duration-700">
         <p class="text-british-red font-semibold tracking-wider text-sm uppercase mb-3">Our Core Values</p>
-        <h2 class="text-4xl md:text-5xl font-light text-navy tracking-tight font-playfair mb-6">Why Choose BIS</h2>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-light text-navy tracking-tight font-playfair mb-6">Why Choose BIS</h2>
         <div class="w-16 h-1 bg-british-red mx-auto"></div>
       </div>
       
-      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-8">
         <div class="text-center group cursor-default p-6 rounded-2xl hover:bg-gray-50 transition-colors reveal opacity-0 translate-y-10 transition-all duration-700 delay-100">
           <div class="w-20 h-20 rounded-2xl bg-navy/5 flex items-center justify-center mx-auto mb-6 group-hover:bg-british-red group-hover:-translate-y-2 transition-all duration-300 shadow-sm">
             <svg class="w-8 h-8 text-navy group-hover:text-white transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -145,17 +145,17 @@
 
   <!-- Latest News Section -->
   <% if (recent_news = News.published.limit(3)).any? %>
-  <div class="py-24 bg-gray-50 border-t border-gray-100">
+  <div class="py-16 sm:py-24 bg-gray-50 border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between items-end mb-12 reveal opacity-0 translate-y-10 transition-all duration-700">
-        <div>
+      <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 sm:mb-12 reveal opacity-0 translate-y-10 transition-all duration-700">
+        <div class="mb-4 sm:mb-0">
           <p class="text-british-red font-semibold tracking-wider text-sm uppercase mb-2">Stay Updated</p>
-          <h2 class="text-4xl md:text-5xl font-light text-navy tracking-tight font-playfair">Latest News</h2>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-light text-navy tracking-tight font-playfair">Latest News</h2>
         </div>
         <%= link_to "View All", news_index_path, class: "hidden sm:inline-flex items-center text-navy font-semibold hover:text-british-red transition-colors group" %>
       </div>
 
-      <div class="grid md:grid-cols-3 gap-8">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
         <% recent_news.each_with_index do |news_item, idx| %>
           <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden reveal opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: <%= idx * 100 %>ms;">
             <% if news_item.image.attached? %>
@@ -185,16 +185,16 @@
   <% end %>
 
   <!-- Campus Facilities -->
-  <div class="py-24 bg-white">
+  <div class="py-16 sm:py-24 bg-white">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="text-center mb-16 reveal opacity-0 translate-y-10 transition-all duration-700">
         <p class="text-british-red font-semibold tracking-wider text-sm uppercase mb-3">Infrastructure</p>
-        <h2 class="text-4xl md:text-5xl font-light text-navy tracking-tight font-playfair mb-6">Campus Facilities</h2>
+        <h2 class="text-3xl sm:text-4xl md:text-5xl font-light text-navy tracking-tight font-playfair mb-6">Campus Facilities</h2>
         <div class="w-16 h-1 bg-british-red mx-auto"></div>
       </div>
       
-      <div class="grid md:grid-cols-3 gap-8">
-        <div class="relative h-[400px] rounded-2xl overflow-hidden shadow-lg group reveal opacity-0 translate-y-10 transition-all duration-700 delay-100">
+      <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
+        <div class="relative h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg group reveal opacity-0 translate-y-10 transition-all duration-700 delay-100">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=800');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -203,7 +203,7 @@
           </div>
         </div>
 
-        <div class="relative h-[400px] rounded-2xl overflow-hidden shadow-lg group reveal opacity-0 translate-y-10 transition-all duration-700 delay-200">
+        <div class="relative h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg group reveal opacity-0 translate-y-10 transition-all duration-700 delay-200">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=800');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -212,7 +212,7 @@
           </div>
         </div>
 
-        <div class="relative h-[400px] rounded-2xl overflow-hidden shadow-lg group reveal opacity-0 translate-y-10 transition-all duration-700 delay-300">
+        <div class="relative h-[280px] sm:h-[350px] md:h-[400px] rounded-2xl overflow-hidden shadow-lg group reveal opacity-0 translate-y-10 transition-all duration-700 delay-300">
           <div class="absolute inset-0 bg-cover bg-center transition-transform duration-1000 group-hover:scale-110" style="background-image: url('https://images.unsplash.com/photo-1535961652354-923cb08225e8?w=800');"></div>
           <div class="absolute inset-0 bg-gradient-to-t from-navy/90 via-navy/40 to-transparent opacity-90 group-hover:opacity-100 transition-opacity duration-300"></div>
           <div class="absolute bottom-0 left-0 right-0 p-8 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
@@ -225,27 +225,27 @@
   </div>
 
   <!-- Contact Us Anchor Section -->
-  <section id="contact-us" class="py-24 bg-navy relative overflow-hidden">
+  <section id="contact-us" class="py-16 sm:py-24 bg-navy relative overflow-hidden">
     <!-- Background pattern -->
     <div class="absolute inset-0 opacity-5">
       <div class="absolute w-full h-full" style="background-image: radial-gradient(#fff 1px, transparent 1px); background-size: 30px 30px;"></div>
     </div>
     
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-      <div class="grid lg:grid-cols-2 gap-16 items-center">
+      <div class="grid lg:grid-cols-2 gap-10 sm:gap-16 items-center">
         
         <div class="reveal opacity-0 translate-y-10 transition-all duration-700">
           <p class="text-british-red font-semibold tracking-wider text-sm uppercase mb-3">Get in Touch</p>
-          <h2 class="text-4xl md:text-5xl font-light text-white tracking-tight font-playfair mb-6">Contact Us</h2>
+          <h2 class="text-3xl sm:text-4xl md:text-5xl font-light text-white tracking-tight font-playfair mb-6">Contact Us</h2>
           <div class="w-16 h-1 bg-british-red mb-10"></div>
           
-          <p class="text-gray-300 text-lg font-light leading-relaxed mb-10">
+          <p class="text-gray-300 text-base sm:text-lg font-light leading-relaxed mb-8 sm:mb-10">
             We are always here to help. Reach out to us for admissions, inquiries, or any other information regarding the Britain International School System.
           </p>
 
-          <div class="space-y-8">
+          <div class="space-y-6 sm:space-y-8">
             <div class="flex items-start">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mr-6">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mr-4 sm:mr-6">
                 <svg class="w-6 h-6 text-british-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
               </div>
               <div>
@@ -255,7 +255,7 @@
             </div>
 
             <div class="flex items-start">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mr-6">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mr-4 sm:mr-6">
                 <svg class="w-6 h-6 text-british-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
               </div>
               <div>
@@ -265,7 +265,7 @@
             </div>
 
             <div class="flex items-start">
-              <div class="w-12 h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mr-6">
+              <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/5 flex items-center justify-center shrink-0 border border-white/10 mr-4 sm:mr-6">
                 <svg class="w-6 h-6 text-british-red" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
               </div>
               <div>
@@ -279,8 +279,8 @@
         </div>
 
         <!-- Admissions Block -->
-        <div class="bg-white p-10 md:p-14 rounded-2xl shadow-2xl reveal opacity-0 translate-y-10 transition-all duration-700 delay-200">
-          <h3 class="text-3xl font-playfair text-navy mb-4">Admissions are Open</h3>
+        <div class="bg-white p-6 sm:p-10 md:p-14 rounded-2xl shadow-2xl reveal opacity-0 translate-y-10 transition-all duration-700 delay-200">
+          <h3 class="text-2xl sm:text-3xl font-playfair text-navy mb-4">Admissions are Open</h3>
           <p class="text-gray-500 mb-8 leading-relaxed">
             Ready to join the Britain International School System? Start your child's journey towards academic excellence and strong moral character.
           </p>
