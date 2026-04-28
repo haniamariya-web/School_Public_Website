@@ -2,11 +2,12 @@ class Admin::PostsController < Admin::BaseController
   before_action :set_post, only: [:edit, :update, :destroy, :remove_media]
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = Post.includes(media_file: { file_attachment: :blob }).order(created_at: :desc)
   end
 
   def new
     @post = Post.new
+    @post.build_media_file
   end
 
   def create
@@ -14,22 +15,22 @@ class Admin::PostsController < Admin::BaseController
     if @post.save
       redirect_to admin_posts_path, notice: "Post created successfully."
     else
-      flash.discard
+      @post.build_media_file unless @post.media_file
       flash.now[:alert] = "Unable to create post. Fix the errors below."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
+    @post.build_media_file unless @post.media_file
   end
 
   def update
     if @post.update(post_params)
       redirect_to admin_posts_path, notice: "Post updated successfully."
     else
-      flash.discard
       flash.now[:alert] = "Unable to update post. Fix the errors below."
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
@@ -39,20 +40,17 @@ class Admin::PostsController < Admin::BaseController
   end
   
   def remove_media
-    puts "=" * 50
-    puts "Remove media called for post #{@post.id}"
-    puts "Media attached? #{@post.media.attached?}"
-
-    if @post.media.attached?
-      @post.media.purge
-      puts "Media purged successfully"
+    # Since it's has_one, we just destroy the associated media_file
+    if @post.media_file.present?
+      @post.media_file.destroy
+      notice_msg = "Media removed."
     else
-      puts "No media found"
+      notice_msg = "No media found to remove."
     end
 
-    puts "=" * 50
-    redirect_to edit_admin_post_path(@post), notice: "Media removed."
+    redirect_to edit_admin_post_path(@post), notice: notice_msg
   end
+
   private
 
   def set_post
@@ -60,6 +58,10 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :campus_id, :published_at, :media)
+    # Replaced :media with nested attributes for media_file
+    params.require(:post).permit(
+      :title, :content, :campus_id, :published_at,
+      media_file_attributes: [:id, :file, :_destroy]
+    )
   end
 end

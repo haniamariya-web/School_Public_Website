@@ -61,11 +61,13 @@
                data-news-modal-date-param="<%= news_item.published_at.strftime('%B %d, %Y') %>"
                data-news-modal-content-param="<%= j news_item.content.to_s %>"
                data-news-modal-campus-param="<%= news_item.campus&.name %>"
-               data-news-modal-has-media-param="<%= news_item.image.attached? || news_item.video.attached? %>"
-               <% if news_item.image.attached? %>
-                 data-news-modal-image-url-param="<%= url_for(news_item.image) %>"
-               <% elsif news_item.video.attached? %>
-                 data-news-modal-video-url-param="<%= url_for(news_item.video) %>"
+               data-news-modal-has-media-param="<%= news_item.media_file&.file&.attached? ? true : false %>"
+               <% if news_item.media_file&.file&.attached? %>
+                 <% if news_item.media_file.file.content_type.start_with?('image/') %>
+                   data-news-modal-image-url-param="<%= url_for(news_item.media_file.file) %>"
+                 <% elsif news_item.media_file.file.content_type.start_with?('video/') %>
+                   data-news-modal-video-url-param="<%= url_for(news_item.media_file.file) %>"
+                 <% end %>
                <% end %>>
             
             <div class="p-6 md:p-8 flex-grow">
@@ -86,14 +88,16 @@
             </div>
             
             <!-- Optional thumbnail preview in the list -->
-            <% if news_item.image.attached? %>
-              <div class="hidden md:block w-48 lg:w-64 flex-shrink-0 bg-gray-100">
-                <%= image_tag news_item.image, class: "w-full h-full object-cover" %>
-              </div>
-            <% elsif news_item.video.attached? %>
-              <div class="hidden md:block w-48 lg:w-64 flex-shrink-0 bg-navy relative flex items-center justify-center">
-                <svg class="w-12 h-12 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-              </div>
+            <% if news_item.media_file&.file&.attached? %>
+              <% if news_item.media_file.file.content_type.start_with?('image/') %>
+                <div class="hidden md:block w-48 lg:w-64 flex-shrink-0 bg-gray-100">
+                  <%= image_tag news_item.media_file.file, class: "w-full h-full object-cover" %>
+                </div>
+              <% elsif news_item.media_file.file.content_type.start_with?('video/') %>
+                <div class="hidden md:block w-48 lg:w-64 flex-shrink-0 bg-navy relative flex items-center justify-center">
+                  <svg class="w-12 h-12 text-white opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                </div>
+              <% end %>
             <% end %>
           </div>
         <% end %>
