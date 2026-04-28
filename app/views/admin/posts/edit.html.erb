@@ -47,8 +47,8 @@
 
       <div class="file-upload-wrapper">
         <%= f.label :media, "Media file", class: "block text-navy font-semibold mb-2" %>
-        <%= f.file_field :media, accept: "image/png,image/jpeg,image/jpg,image/gif,image/webp,video/mp4,video/mpeg,video/quicktime", class: "w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-sm text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-british-red", data: { controller: "file-size", action: "change->file-size#validate", "file-size-max-value": 1048576 } %>
-        <p class="text-xs text-gray-500 mt-2">Upload one image or video only. This file replaces the existing media attachment and must be 1MB or smaller.</p>
+        <%= f.file_field :media, accept: "image/png,image/jpeg,image/jpg,image/gif,image/webp,video/mp4,video/mpeg,video/quicktime", class: "w-full border border-gray-300 rounded-lg px-4 py-3 bg-white text-sm text-gray-700 cursor-pointer focus:outline-none focus:ring-2 focus:ring-british-red", data: { controller: "file-size", action: "change->file-size#validate", "file-size-max-value": 10,485,760 } %>
+        <p class="text-xs text-gray-500 mt-2">Upload one media file only. This file replaces the existing media attachment. Size limit: 10MB</p>
         <p class="file-size-message mt-2 text-sm text-red-600" aria-live="polite"></p>
         <% if @post.errors[:media].any? %>
           <p class="mt-2 text-sm text-red-600"><%= @post.errors.full_messages_for(:media).join(", ") %></p>
