@@ -83,7 +83,7 @@
               <% @available_posts.each do |post| %>
                 <option value="<%= post.id %>" class="py-1">
                   <%= post.title %>
-                  <% if post.media_type == :image %> 📷<% elsif post.media_type == :video %> 🎥<% end %>
+                  <% if post.media_file&.file&.attached? && post.media_file.file.content_type.start_with?('image/') %> 📷<% elsif post.media_file&.file&.attached? && post.media_file.file.content_type.start_with?('video/') %> 🎥<% end %>
                   (<%= post.campus&.name || "All Campuses" %>)
                 </option>
               <% end %>

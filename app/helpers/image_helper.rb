@@ -4,6 +4,8 @@ module ImageHelper
               object.cover_image
             elsif object.respond_to?(:image) && object.image.attached?
               object.image
+            elsif object.respond_to?(:media_file) && object.media_file&.file&.attached? && object.media_file.file.content_type.start_with?('image/')
+              object.media_file.file
             end
 
     return nil unless image

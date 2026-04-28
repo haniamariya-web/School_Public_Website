@@ -18,10 +18,12 @@
         <tr class="border-t">
           <td class="px-6 py-4"><%= item.title %></td>
           <td class="px-6 py-4">
-            <% if item.image.attached? %>
-              <span class="text-blue-600">�� Image</span>
-            <% elsif item.video.attached? %>
-              <span class="text-purple-600">🎥 Video</span>
+            <% if item.media_file&.file&.attached? %>
+              <% if item.media_file.file.content_type.start_with?('image/') %>
+                <span class="text-blue-600">🖼️ Image</span>
+              <% else %>
+                <span class="text-purple-600">🎥 Video</span>
+              <% end %>
             <% else %>
               <span class="text-gray-400">None</span>
             <% end %>
@@ -34,4 +36,5 @@
         </tr>
       <% end %>
     </tbody>
+  </table>
 </div>

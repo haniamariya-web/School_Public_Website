@@ -15,14 +15,55 @@
 </div>
 
 <div class="mb-4">
-  <%= f.label :image, "Image (optional)", class: "block text-navy font-semibold mb-2" %>
-  <%= f.file_field :image, accept: "image/png,image/jpeg,image/jpg", class: "w-full border border-gray-300 rounded p-2" %>
-  <% if f.object.errors[:image].any? %>
-    <p class="text-red-600 text-xs mt-1 italic"><%= f.object.errors.full_messages_for(:image).first %></p>
-  <% end %>
+  <%= f.label :campus_id, "Campus (Optional)", class: "block text-navy font-semibold mb-2" %>
+  <%= f.collection_select :campus_id, Campu.all, :id, :name, { include_blank: "All Campuses" }, { class: "w-full border border-gray-300 rounded p-2" } %>
 </div>
 
-<div class="mb-4">
-  <%= f.label :video, "Video (optional)", class: "block text-navy font-semibold mb-2" %>
-  <%= f.file_field :video, accept: "video/mp4", class: "w-full border border-gray-300 rounded p-2" %>
-</div>
+<hr class="my-6 border-gray-200">
+
+<%# Updated section for Polymorphic MediaFile with Previews %>
+<%= f.fields_for :media_file do |mf| %>
+  <div class="mb-4">
+    <%= mf.label :file, "Attachment (Image or Video)", class: "block text-navy font-semibold mb-2" %>
+    
+    <%# PREVIEW BLOCK: Shows the existing file if one is attached %>
+    <% if f.object.media_file&.file&.attached? && f.object.media_file.file.persisted? %>
+      <div class="mb-4 p-4 bg-gray-50 border border-gray-200 rounded-lg">
+        <p class="text-sm font-semibold text-navy mb-3">Current Attachment:</p>
+        
+        <div class="mb-3">
+          <% if f.object.media_file.file.content_type.start_with?("image/") %>
+            <%= image_tag f.object.media_file.file, class: "max-h-64 rounded shadow-sm border border-gray-300" %>
+          <% elsif f.object.media_file.file.content_type.start_with?("video/") %>
+            <video controls class="max-h-64 rounded shadow-sm border border-gray-300 w-full max-w-xl">
+              <source src="<%= url_for(f.object.media_file.file) %>" type="<%= f.object.media_file.file.content_type %>">
+              Your browser does not support the video tag.
+            </video>
+          <% end %>
+        </div>
+
+        <div class="flex items-center justify-between bg-white p-2 rounded border border-gray-200">
+          <span class="text-xs text-gray-500 truncate mr-4">
+            <%= f.object.media_file.file.filename %> (<%= number_to_human_size(f.object.media_file.file.byte_size) %>)
+          </span>
+          <%= link_to "Remove Media", remove_media_admin_news_path(f.object), 
+              data: { turbo_method: :delete, turbo_confirm: "Are you sure you want to remove this media?" }, 
+              class: "text-red-600 text-sm font-bold hover:text-red-800 transition" %>
+        </div>
+      </div>
+    <% end %>
+
+    <%= mf.file_field :file, 
+        accept: "image/png,image/jpeg,image/jpg,image/webp,video/mp4", 
+        class: "w-full border border-gray-300 rounded p-2 bg-white #{'border-red-500' if mf.object.errors[:file].any?}" %>
+    
+    <% mf.object.errors.full_messages_for(:file).each do |message| %>
+      <p class="text-red-600 text-xs mt-1 italic"><%= message %></p>
+    <% end %>
+    
+    <p class="text-gray-500 text-xs mt-2">
+      <strong>Note:</strong> Uploading a new file will replace the current one. 
+      Max size: 10MB. Supports PNG, JPG, WEBP, and MP4.
+    </p>
+  </div>
+<% end %>

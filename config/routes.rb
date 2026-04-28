@@ -11,8 +11,14 @@ Rails.application.routes.draw do
         delete :remove_media
       end
     end
+
     
-    resources :news, except: [:show]
+    resources :news, except: [:show] do
+      member do
+        delete :remove_media
+      end
+    end
+    
     resources :campu
     resources :inquiries do
       patch :mark_contacted, on: :member

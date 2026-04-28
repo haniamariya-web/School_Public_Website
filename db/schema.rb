@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_28_135720) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -110,6 +110,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
     t.integer "preferred_call_time"
     t.integer "status"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "media_files", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "mediable_id", null: false
+    t.string "mediable_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mediable_type", "mediable_id"], name: "index_media_files_on_mediable"
   end
 
   create_table "news", force: :cascade do |t|

@@ -9,6 +9,7 @@
       <tr>
         <th class="px-6 py-3 text-left">Title</th>
         <th class="px-6 py-3 text-left">Campus</th>
+        <th class="px-6 py-3 text-left">Media</th>
         <th class="px-6 py-3 text-left">Published</th>
         <th class="px-6 py-3 text-left">Actions</th>
       </tr>
@@ -18,6 +19,17 @@
         <tr class="border-t">
           <td class="px-6 py-4"><%= post.title %></td>
           <td class="px-6 py-4"><%= post.campus&.name || "All Campuses" %></td>
+          <td class="px-6 py-4">
+            <% if post.media_file&.file&.attached? %>
+              <% if post.media_file.file.content_type.start_with?('image/') %>
+                <span class="text-blue-600">🖼️ Image</span>
+              <% else %>
+                <span class="text-purple-600">🎥 Video</span>
+              <% end %>
+            <% else %>
+              <span class="text-gray-400">None</span>
+            <% end %>
+          </td>
           <td class="px-6 py-4"><%= post.published_at&.strftime("%b %d, %Y") || "Draft" %></td>
           <td class="px-6 py-4">
             <%= link_to "Edit", edit_admin_post_path(post), class: "text-navy hover:underline mr-2" %>
