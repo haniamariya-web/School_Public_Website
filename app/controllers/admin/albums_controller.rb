@@ -24,7 +24,8 @@ class Admin::AlbumsController < Admin::BaseController
       redirect_to admin_albums_path, notice: "Album created successfully."
     else
       @available_posts = Post.all.order(created_at: :desc)
-      render :new
+      flash.now[:alert] = "Unable to create album. Fix the errors below."
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -46,7 +47,8 @@ class Admin::AlbumsController < Admin::BaseController
       redirect_to admin_albums_path, notice: "Album updated successfully."
     else
       @available_posts = Post.where.not(id: @album.posts.pluck(:id)).order(created_at: :desc)
-      render :edit
+      flash.now[:alert] = "Unable to update album. Fix the errors below."
+      render :edit, status: :unprocessable_entity
     end
   end
 

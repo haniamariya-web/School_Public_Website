@@ -14,7 +14,8 @@ class Admin::CampuController < Admin::BaseController
     if @campu.save
       redirect_to admin_campu_index_path, notice: "Campus created successfully."
     else
-      render :new
+      flash.now[:alert] = "Unable to create campus. Fix the errors below."
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -25,7 +26,8 @@ class Admin::CampuController < Admin::BaseController
     if @campu.update(campu_params)
       redirect_to admin_campu_index_path, notice: "Campus updated successfully."
     else
-      render :edit
+      flash.now[:alert] = "Unable to update campus. Fix the errors below."
+      render :edit, status: :unprocessable_entity
     end
   end
 

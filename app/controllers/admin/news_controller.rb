@@ -19,7 +19,8 @@ class Admin::NewsController < Admin::BaseController
     if @news.save
       redirect_to admin_news_index_path, notice: "News created successfully."
     else
-      render :new
+      flash.now[:alert] = "Unable to create news item. Fix the errors below."
+      render :new, status: :unprocessable_entity
     end
   end
 
@@ -33,7 +34,8 @@ class Admin::NewsController < Admin::BaseController
     if @news.update(news_params)
       redirect_to admin_news_index_path, notice: "News updated successfully."
     else
-      render :edit
+      flash.now[:alert] = "Unable to update news item. Fix the errors below."
+      render :edit, status: :unprocessable_entity
     end
   end
 
