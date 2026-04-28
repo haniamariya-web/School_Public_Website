@@ -1,0 +1,22 @@
+NEW ADMISSION INQUIRY
+============================================================
+
+You have received a new inquiry from the website. 
+Here are the details:
+
+------------------------------------------------------------
+
+Name:    <%= @inquiry.name %>
+Email:   <%= @inquiry.email %>
+
+Message:
+------------------------------------------------------------
+<%= @inquiry.message %>
+------------------------------------------------------------
+
+REPLY TO APPLICANT:
+To respond, simply reply to this email or click here:
+mailto:<%= @inquiry.email %>
+
+============================================================
+Sent from Britain International School Admin Portal
