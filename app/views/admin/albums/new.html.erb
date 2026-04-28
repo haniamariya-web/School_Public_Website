@@ -30,7 +30,7 @@
       <div class="p-6 space-y-5">
         <div>
           <%= f.label :title, class: "block text-navy font-medium mb-1.5" %>
-          <%= f.text_field :title, class: "w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-british-red focus:border-transparent transition", placeholder: "e.g., Annual Sports Day 2025" %>
+          <%= f.text_field :title, required: true, maxlength: 120, class: "w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-british-red focus:border-transparent transition", placeholder: "e.g., Annual Sports Day 2025" %>
         </div>
 
         <div>
@@ -41,12 +41,12 @@
         <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
           <div>
             <%= f.label :event_date, class: "block text-navy font-medium mb-1.5" %>
-            <%= f.date_field :event_date, class: "w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-british-red focus:border-transparent transition" %>
+            <%= f.date_field :event_date, required: true, class: "w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-british-red focus:border-transparent transition" %>
           </div>
 
           <div>
             <%= f.label :campus_id, "Campus", class: "block text-navy font-medium mb-1.5" %>
-            <%= f.collection_select :campus_id, Campu.all, :id, :name, { include_blank: "Select Campus" }, { class: "w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-british-red focus:border-transparent transition" } %>
+            <%= f.collection_select :campus_id, Campu.all, :id, :name, { include_blank: "Select Campus" }, { required: true, class: "w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-british-red focus:border-transparent transition" } %>
           </div>
         </div>
 
@@ -83,8 +83,7 @@
               <% @available_posts.each do |post| %>
                 <option value="<%= post.id %>" class="py-1">
                   <%= post.title %>
-                  <% if post.image.attached? %> 📷<% end %>
-                  <% if post.video.attached? %> 🎥<% end %>
+                  <% if post.media_type == :image %> 📷<% elsif post.media_type == :video %> 🎥<% end %>
                   (<%= post.campus&.name || "All Campuses" %>)
                 </option>
               <% end %>

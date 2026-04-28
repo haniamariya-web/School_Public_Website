@@ -85,6 +85,12 @@
   </nav>
 
   <main class="p-8 max-w-7xl mx-auto">
+    <% flash.each do |type, message| %>
+      <div class="mb-6 rounded-xl px-5 py-4 text-sm font-medium <%= type == 'notice' ? 'bg-emerald-100 text-emerald-900 border border-emerald-200' : 'bg-red-100 text-red-900 border border-red-200' %>">
+        <%= message %>
+      </div>
+    <% end %>
+
     <%= yield %>
   </main>
 </body>

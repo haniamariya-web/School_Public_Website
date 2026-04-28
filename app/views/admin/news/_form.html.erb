@@ -1,11 +1,11 @@
 <div class="mb-4">
   <%= f.label :title, class: "block text-navy font-semibold mb-2" %>
-  <%= f.text_field :title, class: "w-full border border-gray-300 rounded p-2" %>
+  <%= f.text_field :title, required: true, maxlength: 160, class: "w-full border border-gray-300 rounded p-2" %>
 </div>
 
 <div class="mb-4">
   <%= f.label :content, class: "block text-navy font-semibold mb-2" %>
-  <%= f.text_area :content, rows: 8, class: "w-full border border-gray-300 rounded p-2" %>
+  <%= f.text_area :content, required: true, rows: 8, class: "w-full border border-gray-300 rounded p-2" %>
 </div>
 
 <div class="mb-4">

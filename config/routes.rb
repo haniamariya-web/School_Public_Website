@@ -8,8 +8,7 @@ Rails.application.routes.draw do
     
     resources :posts do
       member do
-        delete :remove_image
-        delete :remove_video
+        delete :remove_media
       end
     end
     

@@ -3,12 +3,30 @@
 
   <!-- Edit Form -->
   <%= form_with model: [:admin, @album], local: true, html: { multipart: true, class: "bg-white rounded-lg shadow-md overflow-hidden mb-8" } do |f| %>
+    <% if @album.errors.any? %>
+      <div class="bg-red-50 border-l-4 border-red-500 p-4 rounded-lg mb-6">
+        <div class="flex">
+          <svg class="h-5 w-5 text-red-400 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+          </svg>
+          <div class="ml-3">
+            <h3 class="text-sm font-medium text-red-800"><%= pluralize(@album.errors.count, "error") %> prohibited this album from being saved:</h3>
+            <ul class="mt-1 text-sm text-red-700 list-disc list-inside">
+              <% @album.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      </div>
+    <% end %>
+
     <div class="p-6 border-b border-gray-200">
       <h2 class="text-lg font-semibold text-navy mb-4">Album Information</h2>
       
       <div class="mb-4">
         <%= f.label :title, class: "block text-navy font-medium mb-2" %>
-        <%= f.text_field :title, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-british-red" %>
+        <%= f.text_field :title, required: true, maxlength: 120, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-british-red" %>
       </div>
 
       <div class="mb-4">
@@ -19,12 +37,12 @@
       <div class="grid grid-cols-2 gap-4">
         <div class="mb-4">
           <%= f.label :event_date, class: "block text-navy font-medium mb-2" %>
-          <%= f.date_field :event_date, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-british-red" %>
+          <%= f.date_field :event_date, required: true, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-british-red" %>
         </div>
 
         <div class="mb-4">
           <%= f.label :campus_id, "Campus", class: "block text-navy font-medium mb-2" %>
-          <%= f.collection_select :campus_id, Campu.all, :id, :name, { include_blank: "Select Campus" }, { class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-british-red" } %>
+          <%= f.collection_select :campus_id, Campu.all, :id, :name, { include_blank: "Select Campus" }, { required: true, class: "w-full border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-british-red" } %>
         </div>
       </div>
 
@@ -64,10 +82,9 @@
             <div class="flex-1">
               <div class="flex items-center gap-2 mb-1">
                 <span class="font-medium text-navy"><%= post.title %></span>
-                <% if post.image.attached? %>
+                <% if post.media_type == :image %>
                   <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">📷 Image</span>
-                <% end %>
-                <% if post.video.attached? %>
+                <% elsif post.media_type == :video %>
                   <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded">🎥 Video</span>
                 <% end %>
               </div>
@@ -100,10 +117,9 @@
               <div class="flex-1">
                 <div class="flex items-center gap-2">
                   <span class="font-medium text-navy"><%= post.title %></span>
-                  <% if post.image.attached? %>
+                  <% if post.media_type == :image %>
                     <span class="text-xs bg-blue-100 text-blue-700 px-2 py-0.5 rounded">📷 Image</span>
-                  <% end %>
-                  <% if post.video.attached? %>
+                  <% elsif post.media_type == :video %>
                     <span class="text-xs bg-purple-100 text-purple-700 px-2 py-0.5 rounded">🎥 Video</span>
                   <% end %>
                 </div>

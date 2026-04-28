@@ -14,7 +14,7 @@
 
   <div class="mb-4">
     <%= f.label :name, class: "block text-navy font-semibold mb-2" %>
-    <%= f.text_field :name, class: "w-full border border-gray-300 rounded p-2" %>
+    <%= f.text_field :name, required: true, maxlength: 100, class: "w-full border border-gray-300 rounded p-2" %>
   </div>
 
   <div class="mb-4">
@@ -24,7 +24,8 @@
 
   <div class="mb-4">
     <%= f.label :phone, class: "block text-navy font-semibold mb-2" %>
-    <%= f.text_field :phone, class: "w-full border border-gray-300 rounded p-2" %>
+    <%= f.telephone_field :phone, maxlength: 20, inputmode: "tel", pattern: "[0-9\s+()-]*", class: "w-full border border-gray-300 rounded p-2" %>
+    <p class="text-xs text-gray-500 mt-1">Numbers, spaces, +, parentheses and dashes only</p>
   </div>
 
   <div class="mb-4">

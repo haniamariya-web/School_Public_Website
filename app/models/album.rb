@@ -6,7 +6,8 @@ class Album < ApplicationRecord
   # Active Storage for cover image
   has_one_attached :cover_image
   
-  validates :title, presence: true
+  validates :title, :event_date, presence: true
+  validates :campus, presence: true
   
   scope :recent, -> { order(event_date: :desc) }
   
@@ -14,12 +15,12 @@ class Album < ApplicationRecord
     if cover_image.attached?
       Rails.application.routes.url_helpers.rails_blob_url(cover_image, only_path: true)
     else
-      first_post_image = posts.includes(image_attachment: :blob).find do |post|
-        post.image.attached?
+      first_post_media = posts.includes(media_attachment: :blob).find do |post|
+        post.media.attached?
       end
     
-      if first_post_image
-        Rails.application.routes.url_helpers.rails_blob_url(first_post_image.image, only_path: true)
+      if first_post_media
+        Rails.application.routes.url_helpers.rails_blob_url(first_post_media.media, only_path: true)
       else
         nil
       end

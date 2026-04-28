@@ -5,7 +5,7 @@ class News < ApplicationRecord
 
   belongs_to :campus, class_name: 'Campu', optional: true
   
-  validates :title, presence: true
+  validates :title, :content, presence: true
   
   scope :published, -> { where("published_at <= ?", Time.current).order(published_at: :desc) }
   scope :recent, -> { order(published_at: :desc).limit(5) }
