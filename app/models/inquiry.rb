@@ -4,6 +4,6 @@ class Inquiry < ApplicationRecord
   
   validates :name, :email, :phone, :grade_level, :preferred_call_time, presence: true
   validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
-  validates :phone, length: { minimum: 10 }
+  validates :phone, length: { minimum: 10, maximum: 15 }
   validates :phone, format: { with: /\A[0-9+\-]+\z/, message: "may only include digits, +, and -" }
 end

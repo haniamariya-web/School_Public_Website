@@ -39,20 +39,15 @@ class Admin::PostsController < Admin::BaseController
   end
   
   def remove_media
-    puts "=" * 50
-    puts "Remove media called for post #{@post.id}"
-    puts "Media attached? #{@post.media.attached?}"
-
     if @post.media.attached?
       @post.media.purge
       puts "Media purged successfully"
     else
       puts "No media found"
     end
-
-    puts "=" * 50
     redirect_to edit_admin_post_path(@post), notice: "Media removed."
   end
+  
   private
 
   def set_post

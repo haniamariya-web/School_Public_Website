@@ -6,7 +6,7 @@ class Post < ApplicationRecord
   # Single media attachment
   has_one_attached :media
   
-  MAX_MEDIA_SIZE = 1.megabyte
+  MAX_MEDIA_SIZE = 10.megabyte
   
   validates :title, presence: true
   validates :campus, presence: true
