@@ -25,6 +25,13 @@
 
   <body>
     <%= render "shared/navbar" %>
+    <div data-controller="flash" data-flash-timeout-value="7000">
+      <% flash.each do |type, message| %>
+        <div class="mx-auto max-w-7xl px-4 py-4 text-sm font-medium <%= type == 'notice' ? 'bg-emerald-100 text-emerald-900 border border-emerald-200' : 'bg-red-100 text-red-900 border border-red-200' %>">
+          <%= message %>
+        </div>
+      <% end %>
+    </div>
     <%= yield %>
     <%= render "shared/footer" %>
   </body>

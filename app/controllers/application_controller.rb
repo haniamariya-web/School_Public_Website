@@ -4,4 +4,19 @@ class ApplicationController < ActionController::Base
 
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
+
+  rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
+  rescue_from ActionController::ParameterMissing, with: :bad_request
+
+  private
+
+  def record_not_found(exception = nil)
+    flash[:alert] = "The requested resource was not found."
+    redirect_to root_path
+  end
+
+  def bad_request(exception = nil)
+    flash[:alert] = "Invalid request. Please check your input and try again."
+    redirect_to request.referrer || root_path
+  end
 end

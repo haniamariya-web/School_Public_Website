@@ -10,6 +10,7 @@ class InquiriesController < ApplicationController
     if @inquiry.save
       redirect_to root_path, notice: "Thank you! Our admissions team will contact you soon."
     else
+      flash.now[:alert] = "Unable to submit inquiry. Fix the errors below."
       render :new, status: :unprocessable_entity
     end
   end
