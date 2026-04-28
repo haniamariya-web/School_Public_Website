@@ -13,4 +13,9 @@ class News < ApplicationRecord
   def has_media?
     media_file&.file&.attached?
   end
+
+  private
+  def set_published_at
+    self.published_at ||= Time.current
+  end
 end
