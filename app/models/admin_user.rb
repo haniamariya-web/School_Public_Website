@@ -1,6 +1,14 @@
+# app/models/admin_user.rb
 class AdminUser < ApplicationRecord
-  # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
-  devise :database_authenticatable, 
-         :recoverable, :rememberable, :validatable
+  devise :database_authenticatable, :recoverable, :rememberable, :validatable
+  
+  ROLES = %w[super_admin campus_manager].freeze
+  
+  def super_admin?
+    role == 'super_admin'
+  end
+  
+  def campus_manager?
+    role == 'campus_manager'
+  end
 end

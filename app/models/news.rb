@@ -1,5 +1,6 @@
 class News < ApplicationRecord
   belongs_to :campus, class_name: 'Campu', optional: true
+  before_save :set_published_at
   
   # Polymorphic relationship
   has_one :media_file, as: :mediable, dependent: :destroy

@@ -5,6 +5,9 @@ class ApplicationController < ActionController::Base
   # Changes to the importmap will invalidate the etag for HTML responses
   stale_when_importmap_changes
 
+  include Pundit::Authorization
+  rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
+
   rescue_from ActiveRecord::RecordNotFound, with: :record_not_found
   rescue_from ActionController::ParameterMissing, with: :bad_request
 
@@ -19,4 +22,11 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "Invalid request. Please check your input and try again."
     redirect_to request.referrer || root_path
   end
+
+  def user_not_authorized
+    redirect_to root_path, alert: "Not authorized"
+  end
+
+
 end
+
