@@ -1,17 +1,22 @@
+# app/controllers/admin/campu_controller.rb
 class Admin::CampuController < Admin::BaseController
-  before_action :set_campu, only: [:edit, :update, :destroy]
+  before_action :set_campus, only: [:edit, :update, :destroy]
+  before_action :authorize_campus
 
   def index
-    @campuses = Campu.all.order(:name)
+    @campuses = policy_scope(Campu).order(:name)
+    authorize Campu  # ✅ Changed from Campu to Campu (it's correct, but check case)
   end
 
   def new
-    @campu = Campu.new
+    authorize Campu  # ✅ Changed
+    @campus = Campu.new
   end
 
   def create
-    @campu = Campu.new(campu_params)
-    if @campu.save
+    authorize Campu  # ✅ Changed
+    @campus = Campu.new(campus_params)
+    if @campus.save
       redirect_to admin_campu_index_path, notice: "Campus created successfully."
     else
       flash.now[:alert] = "Unable to create campus. Fix the errors below."
@@ -20,10 +25,12 @@ class Admin::CampuController < Admin::BaseController
   end
 
   def edit
+    authorize @campus  # ✅ Add this line
   end
 
   def update
-    if @campu.update(campu_params)
+    authorize @campus  # ✅ Add this line
+    if @campus.update(campus_params)
       redirect_to admin_campu_index_path, notice: "Campus updated successfully."
     else
       flash.now[:alert] = "Unable to update campus. Fix the errors below."
@@ -32,17 +39,22 @@ class Admin::CampuController < Admin::BaseController
   end
 
   def destroy
-    @campu.destroy
+    authorize @campus  # ✅ Add this line
+    @campus.destroy
     redirect_to admin_campu_index_path, notice: "Campus deleted."
   end
 
   private
 
-  def set_campu
-    @campu = Campu.find(params[:id])
+  def set_campus
+    @campus = Campu.find(params[:id])
   end
 
-  def campu_params
+  def authorize_campus
+    authorize @campus if @campus
+  end
+
+  def campus_params
     params.require(:campu).permit(:name, :address, :phone, :email, :principal_name)
   end
 end
