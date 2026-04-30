@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_29_191110) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_30_150332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -101,6 +101,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_191110) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "franchise_applications", force: :cascade do |t|
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "name"
+    t.string "phone"
+    t.string "status"
+    t.string "stripe_payment_intent_id"
+    t.datetime "updated_at", null: false
+    t.index ["stripe_payment_intent_id"], name: "index_franchise_applications_on_stripe_payment_intent_id"
+  end
+
+  create_table "franchise_payments", force: :cascade do |t|
+    t.integer "amount"
+    t.string "card_last4"
+    t.datetime "created_at", null: false
+    t.integer "franchise_application_id"
+    t.datetime "paid_at"
+    t.string "receipt_url"
+    t.string "status"
+    t.string "stripe_payment_intent_id"
+    t.datetime "updated_at", null: false
+    t.index ["stripe_payment_intent_id"], name: "index_franchise_payments_on_stripe_payment_intent_id"
+  end
+
   create_table "inquiries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -160,6 +185,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_29_191110) do
   add_foreign_key "album_posts", "albums"
   add_foreign_key "album_posts", "posts"
   add_foreign_key "albums", "campus", column: "campus_id"
+  add_foreign_key "franchise_payments", "franchise_applications"
   add_foreign_key "news", "campus", column: "campus_id"
   add_foreign_key "posts", "campus", column: "campus_id"
   add_foreign_key "results", "campus", column: "campus_id"
