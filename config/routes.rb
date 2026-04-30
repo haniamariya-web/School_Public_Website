@@ -38,6 +38,13 @@ Rails.application.routes.draw do
   get "campuses", to: "campuses#index"
   resources :news, only: [:index]
   get "up" => "rails/health#show", as: :rails_health_check
+
+  get "buy-franchise", to: "franchise_applications#new"
+  post "franchise_applications", to: "franchise_applications#create"
+  get "franchise_applications/success", to: "franchise_applications#success"
+  get "franchise_applications/cancel", to: "franchise_applications#cancel"  
+
+  post "/stripe/webhooks", to: "webhooks#stripe"
   
   resources :inquiries, only: [:new, :create]
   get '/admissions', to: 'inquiries#new'

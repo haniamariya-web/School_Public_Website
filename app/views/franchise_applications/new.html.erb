@@ -1,0 +1,44 @@
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 mt-10">
+  <h1 class="text-3xl font-bold text-navy mb-2">Buy a Franchise</h1>
+  <p class="text-gray-600 mb-6">Complete the form below to start your franchise journey</p>
+
+  <%= form_with model: @franchise_application, local: true, class: "space-y-4" do |f| %>
+    <% if @franchise_application.errors.any? %>
+      <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
+        <h2 class="font-bold"><%= pluralize(@franchise_application.errors.count, "error") %> prohibited this application:</h2>
+        <ul class="list-disc list-inside">
+          <% @franchise_application.errors.full_messages.each do |msg| %>
+            <li><%= msg %></li>
+          <% end %>
+        </ul>
+      </div>
+    <% end %>
+
+    <div>
+      <%= f.label :name, class: "block text-navy font-semibold mb-2" %>
+      <%= f.text_field :name, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+    </div>
+
+    <div>
+      <%= f.label :email, class: "block text-navy font-semibold mb-2" %>
+      <%= f.email_field :email, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+    </div>
+
+    <div>
+      <%= f.label :phone, class: "block text-navy font-semibold mb-2" %>
+      <%= f.telephone_field :phone, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+    </div>
+
+    <div>
+      <%= f.label :address, class: "block text-navy font-semibold mb-2" %>
+      <%= f.text_area :address, rows: 3, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+    </div>
+
+    <div class="bg-gray-50 p-4 rounded-lg mb-4">
+      <p class="text-sm text-gray-600">Franchise Fee: <strong class="text-navy">$500</strong></p>
+      <p class="text-xs text-gray-500 mt-1">You'll be redirected to secure payment after submitting</p>
+    </div>
+
+    <%= f.submit "Submit Application & Proceed to Payment", class: "w-full bg-british-red text-white py-3 rounded-lg hover:bg-red-700 transition font-semibold cursor-pointer" %>
+  <% end %>
+</div>
