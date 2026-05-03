@@ -23,16 +23,20 @@ class FranchiseApplicationsController < ApplicationController
       
       @franchise_application.update(stripe_payment_intent_id: stripe_payment_intent.id)
       
-      # Store client_secret for frontend
-      @client_secret = stripe_payment_intent.client_secret
+      # Store in session and redirect
+      session[:client_secret] = stripe_payment_intent.client_secret
+      session[:application_id] = @franchise_application.id
       
-      # for temporary success check
-      flash.now[:success] = "Application submitted successfully. Please proceed to payment."
-      redirect_to franchise_applications_success_path
-      
+      redirect_to franchise_payment_path
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def payment
+    @client_secret = session[:client_secret]
+    @franchise_application = FranchiseApplication.find(session[:application_id])
+    render :payment
   end
 
   def success

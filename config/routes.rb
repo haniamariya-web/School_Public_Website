@@ -43,6 +43,7 @@ Rails.application.routes.draw do
   post "franchise_applications", to: "franchise_applications#create"
   get "franchise_applications/success", to: "franchise_applications#success"
   get "franchise_applications/cancel", to: "franchise_applications#cancel"  
+  get "franchise_payment", to: "franchise_applications#payment" 
 
   post "/stripe/webhooks", to: "webhooks#stripe"
   

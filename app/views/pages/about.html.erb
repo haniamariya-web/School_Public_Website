@@ -153,7 +153,7 @@
       <h2 class="text-2xl sm:text-3xl font-light text-navy mb-6 sm:mb-8" style="font-family: 'Playfair Display', serif;">Ready to join our community?</h2>
       <div class="flex flex-col md:flex-row justify-center gap-4">
         <%= link_to "View Admissions", new_inquiry_path, class: "bg-navy text-white px-8 sm:px-12 py-3.5 sm:py-4 rounded-full text-sm font-semibold tracking-widest hover:bg-navy/90 transition" %>
-        <%= link_to "Contact Us", new_inquiry_path, class: "border border-navy text-navy px-8 sm:px-12 py-3.5 sm:py-4 rounded-full text-sm font-semibold tracking-widest hover:bg-navy hover:text-white transition" %>
+        <%= link_to "Contact Us", current_page?(root_path) ? "#contact-us" : root_path(anchor: "contact-us"), class: "border border-navy text-navy px-8 sm:px-12 py-3.5 sm:py-4 rounded-full text-sm font-semibold tracking-widest hover:bg-navy hover:text-white transition" %>
       </div>
     </div>
   </section>
