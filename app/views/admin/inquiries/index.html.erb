@@ -1,3 +1,6 @@
+
+
+
 <div class="min-h-screen bg-gray-50">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
     <!-- Header -->
@@ -23,51 +26,100 @@
       </div>
     </div>
 
-    <!-- Inquiries Table -->
-    <div class="bg-white rounded-lg shadow-sm overflow-hidden">
+    <!-- Filters -->
+    <div class="bg-white rounded-lg shadow-sm p-6 mb-8 border border-gray-200">
+      <%= form_with url: admin_inquiries_path, method: :get, local: true, class: "grid grid-cols-1 md:grid-cols-4 gap-4 items-end" do |f| %>
+        <div class="md:col-span-1">
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Search Name</label>
+          <%= f.text_field :name, value: params[:name], placeholder: "Enter name...", 
+              maxlength: 50,
+              pattern: "[A-Za-z\\s]*",
+              title: "Only letters and spaces are allowed",
+              oninput: "this.value = this.value.replace(/[^A-Za-z\\s]/g, '')",
+              class: "block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-british-red/20 focus:border-british-red text-sm transition-all" %>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Status</label>
+          <%= f.select :status, 
+              options_for_select([["Pending Only", ""], ["Show All", "all"], ["Contacted", "contacted"], ["Closed", "closed"]], params[:status]), 
+              {}, 
+              class: "block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-british-red/20 focus:border-british-red text-sm transition-all appearance-none bg-white" %>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Grade Level</label>
+          <%= f.select :grade, options_for_select([["All Grades", ""]] + @grades.map { |g| [g, g] }, params[:grade]), {}, 
+              class: "block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-british-red/20 focus:border-british-red text-sm transition-all appearance-none bg-white" %>
+        </div>
+
+        <div>
+          <label class="block text-xs font-bold text-gray-500 uppercase tracking-wider mb-2">Date Range</label>
+          <%= f.select :date_range, 
+              options_for_select([["Any Time", ""], ["Yesterday", "yesterday"], ["This Week", "this_week"], ["This Month", "this_month"], ["This Year", "this_year"]], params[:date_range]), 
+              {}, 
+              class: "block w-full px-4 py-3 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-british-red/20 focus:border-british-red text-sm transition-all appearance-none bg-white" %>
+        </div>
+
+        <div class="md:col-span-4 flex justify-end gap-3 mt-2">
+          <%= link_to "Clear Filters", admin_inquiries_path, class: "text-gray-500 hover:text-gray-700 text-sm font-medium px-4 py-2" %>
+          <%= f.submit "Apply Filters", class: "bg-navy hover:bg-slate-800 text-white px-8 py-2 rounded-md text-sm font-bold transition shadow-sm cursor-pointer" %>
+        </div>
+      <% end %>
+    </div>
+
+    <!-- Inquiries Table Wrapper -->
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200">
       <% if @inquiries.any? %>
-        <table class="min-w-full">
-          <thead class="bg-gray-50 border-b border-gray-200">
-            <tr>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Name</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Email</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Phone</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Grade</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Submitted</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Status</th>
-              <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700">Action</th>
-            </tr>
-          </thead>
-          <tbody class="divide-y divide-gray-200">
-            <% @inquiries.each do |inquiry| %>
-              <tr class="hover:bg-gray-50 transition">
-                <td class="px-6 py-4 text-sm font-medium text-gray-900"><%= inquiry.name %></td>
-                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.email %></td>
-                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.phone %></td>
-                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.grade_level %></td>
-                <td class="px-6 py-4 text-sm text-gray-600"><%= inquiry.created_at.strftime("%b %d, %Y") %></td>
-                <td class="px-6 py-4 text-sm">
-                  <% if inquiry.contacted? %>
-                    <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" /></svg>
-                      Contacted
-                    </span>
-                  <% else %>
-                    <span class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">
-                      <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" /></svg>
-                      Pending
-                    </span>
-                  <% end %>
-                </td>
-                <td class="px-6 py-4 text-sm">
-                  <% if !inquiry.contacted? %>
-                    <%= button_to "Mark Contacted", mark_contacted_admin_inquiry_path(inquiry), method: :patch, class: "bg-british-red hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-semibold transition" %>
-                  <% end %>
-                </td>
+        <!-- FIX 1: Add overflow-x-auto to allow horizontal scrolling on small screens -->
+        <div class="overflow-x-auto">
+          <table class="min-w-full divide-y divide-gray-200 table-auto">
+            <thead class="bg-gray-50">
+              <tr>
+                <!-- Use whitespace-nowrap to prevent headers from stacking -->
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Name</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Email</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Phone</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Grade</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Submitted</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Status</th>
+                <th class="px-6 py-4 text-left text-sm font-semibold text-gray-700 whitespace-nowrap">Action</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody class="divide-y divide-gray-200 bg-white">
+              <% @inquiries.each do |inquiry| %>
+                <tr class="hover:bg-gray-50 transition">
+                  <!-- FIX 2: Apply truncation helper -->
+                  <td class="px-6 py-4 text-sm font-medium text-gray-900 whitespace-nowrap">
+                    <%= truncate_with_hover(inquiry.name) %>
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap">
+                    <%= truncate_with_hover(inquiry.email, 20) %> <!-- Emails get 20 chars -->
+                  </td>
+                  <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap"><%= inquiry.phone %></td>
+                  <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap"><%= inquiry.grade_level %></td>
+                  <td class="px-6 py-4 text-sm text-gray-600 whitespace-nowrap"><%= inquiry.created_at.strftime("%b %d, %Y") %></td>
+                  <td class="px-6 py-4 text-sm whitespace-nowrap">
+                    <% if inquiry.contacted? %>
+                      <span class="inline-flex items-center gap-2 bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                        Contacted
+                      </span>
+                    <% else %>
+                      <span class="inline-flex items-center gap-2 bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-xs font-semibold">
+                        Pending
+                      </span>
+                    <% end %>
+                  </td>
+                  <td class="px-6 py-4 text-sm whitespace-nowrap">
+                    <% if !inquiry.contacted? %>
+                      <%= button_to "Mark Contacted", mark_contacted_admin_inquiry_path(inquiry), method: :patch, class: "bg-british-red hover:bg-red-700 text-white px-4 py-2 rounded text-xs font-semibold transition shadow-sm" %>
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       <% else %>
         <div class="text-center py-12">
           <svg class="w-16 h-16 text-gray-300 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

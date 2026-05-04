@@ -24,7 +24,7 @@
     <!-- Filter Bar -->
 
     <div class="bg-white rounded-sm shadow-xl p-4 md:p-6 mb-12 border border-gray-100">
-      <p class="text-sm text-gray-700 mb-4 font-medium">Search News</p>
+      <p class="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">Search News</p>
       <%= form_with url: news_index_path, method: :get, class: "flex flex-col md:flex-row gap-4" do |f| %>
         <div class="flex-grow">
           <label for="query" class="sr-only">Search News</label>
@@ -32,17 +32,17 @@
             <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
               <svg class="h-5 w-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
             </div>
-            <%= f.text_field :query, value: params[:query], maxlength: 100, placeholder: "Search by keywords...", class: "block w-full pl-10 pr-3 py-3 border border-gray-200 rounded-sm leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-1 focus:ring-british-red focus:border-british-red sm:text-sm transition-all" %>
+            <%= f.text_field :query, value: params[:query], maxlength: 100, placeholder: "Search by keywords...", class: "block w-full pl-10 pr-3 py-4 border border-gray-200 rounded-sm leading-5 bg-gray-50 placeholder-gray-400 focus:outline-none focus:bg-white focus:ring-2 focus:ring-british-red/20 focus:border-british-red text-base transition-all" %>
           </div>
         </div>
         
         <div class="w-full md:w-64">
           <label for="campus_id" class="sr-only">Filter by Campus</label>
-          <%= f.select :campus_id, options_from_collection_for_select(@campuses, :id, :name, params[:campus_id]), { include_blank: "All Campuses" }, class: "block w-full pl-3 pr-10 py-3 border border-gray-200 rounded-sm leading-5 bg-gray-50 focus:outline-none focus:bg-white focus:ring-1 focus:ring-british-red focus:border-british-red sm:text-sm transition-all appearance-none" %>
+          <%= f.select :campus_id, options_from_collection_for_select(@campuses, :id, :name, params[:campus_id]), { include_blank: "All Campuses" }, class: "block w-full pl-3 pr-10 py-4 border border-gray-200 rounded-sm leading-5 bg-gray-50 focus:outline-none focus:bg-white focus:ring-2 focus:ring-british-red/20 focus:border-british-red text-base transition-all appearance-none" %>
         </div>
 
-        <button type="submit" class="bg-navy hover:bg-british-red text-white px-8 py-3 rounded-sm transition-colors duration-300 font-medium text-sm flex items-center justify-center gap-2 group">
-          <span>Search</span>
+        <button type="submit" class="bg-navy hover:bg-british-red text-white px-10 py-4 rounded-sm transition-all duration-300 font-bold text-sm flex items-center justify-center gap-2 group shadow-md hover:shadow-lg">
+          <span>SEARCH</span>
           <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
         </button>
 
