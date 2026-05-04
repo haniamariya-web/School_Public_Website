@@ -5,18 +5,18 @@ class Admin::BaseController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :admin_record_not_found
   rescue_from ActionController::ParameterMissing, with: :admin_bad_request
   rescue_from Pundit::NotAuthorizedError do |exception|
-    redirect_to admin_root_path, alert: "Access denied. You don't have permission to perform this action."
+    redirect_to admin_root_path, alert: t("flash.admin.common.access_denied")
   end
 
   private
 
   def admin_record_not_found(exception = nil)
-    flash[:alert] = "The requested admin resource was not found."
+    flash[:alert] = t("flash.admin.common.not_found")
     redirect_to admin_root_path
   end
 
   def admin_bad_request(exception = nil)
-    flash[:alert] = "Invalid admin request. Please check your input and try again."
+    flash[:alert] = t("flash.admin.common.invalid_request")
     redirect_to request.referrer || admin_root_path
   end
 

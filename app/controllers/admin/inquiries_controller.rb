@@ -12,7 +12,7 @@ class Admin::InquiriesController < Admin::BaseController
 
   def mark_contacted
     @inquiry.update(status: :contacted)
-    redirect_to admin_inquiries_path, notice: "Inquiry marked as contacted."
+    redirect_to admin_inquiries_path, notice: t("flash.admin.inquiries.marked_contacted")
   end
 
   private

@@ -14,16 +14,16 @@ class ApplicationController < ActionController::Base
   private
 
   def record_not_found(exception = nil)
-    flash[:alert] = "The requested resource was not found."
+    flash[:alert] = t("flash.common.not_found")
     redirect_to root_path
   end
 
   def bad_request(exception = nil)
-    flash[:alert] = "Invalid request. Please check your input and try again."
+    flash[:alert] = t("flash.common.invalid_request")
     redirect_to request.referrer || root_path
   end
 
   def user_not_authorized
-    redirect_to root_path, alert: "Not authorized"
+    redirect_to root_path, alert: t("flash.common.not_authorized")
   end
 end

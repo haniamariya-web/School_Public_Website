@@ -28,4 +28,49 @@
 #       enabled: "ON"
 
 en:
-  hello: "Hello world"
+  flash:
+    common:
+      not_found: "The requested resource was not found."
+      invalid_request: "Invalid request. Please check your input and try again."
+      not_authorized: "Not authorized"
+    admin:
+      common:
+        access_denied: "Access denied. You don't have permission to perform this action."
+        not_found: "The requested admin resource was not found."
+        invalid_request: "Invalid admin request. Please check your input and try again."
+      news:
+        created: "News created successfully."
+        updated: "News updated successfully."
+        deleted: "News deleted."
+        media_removed: "Media removed successfully."
+        media_remove_failed: "Failed to remove media."
+        create_failed: "Unable to create news item. Fix the errors below."
+        update_failed: "Unable to update news item. Fix the errors below."
+      campuses:
+        created: "Campus created successfully."
+        updated: "Campus updated successfully."
+        deleted: "Campus deleted."
+        create_failed: "Unable to create campus. Fix the errors below."
+        update_failed: "Unable to update campus. Fix the errors below."
+      albums:
+        created: "Album created successfully."
+        updated: "Album updated successfully."
+        deleted: "Album deleted."
+        post_added: "Post added to album."
+        post_already_in: "Post already in album."
+        post_removed: "Post removed from album."
+        create_failed: "Unable to create album. Fix the errors below."
+        update_failed: "Unable to update album. Fix the errors below."
+      posts:
+        created: "Post created successfully."
+        updated: "Post updated successfully."
+        deleted: "Post deleted."
+        media_removed: "Media removed."
+        no_media_found: "No media found to remove."
+        create_failed: "Unable to create post. Fix the errors below."
+        update_failed: "Unable to update post. Fix the errors below."
+      inquiries:
+        marked_contacted: "Inquiry marked as contacted."
+    inquiries:
+      thanks: "Thank you! Our admissions team will contact you soon."
+      create_failed: "Unable to submit inquiry. Fix the errors below."

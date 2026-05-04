@@ -10,9 +10,9 @@ class InquiriesController < ApplicationController
     if @inquiry.save
       # Enqueue background job to send email
       InquiryEmailJob.perform_later(@inquiry.id)
-      redirect_to root_path, notice: "Thank you! Our admissions team will contact you soon."
+      redirect_to root_path, notice: t("flash.inquiries.thanks")
     else
-      flash.now[:alert] = "Unable to submit inquiry. Fix the errors below."
+      flash.now[:alert] = t("flash.inquiries.create_failed")
       render :new, status: :unprocessable_entity
     end
   end
