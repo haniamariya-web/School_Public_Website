@@ -1,5 +1,5 @@
 class Admin::AlbumsController < Admin::BaseController
-  before_action :set_album, only: [:edit, :update, :destroy, :add_post, :remove_post]
+  before_action :set_album, only: [ :edit, :update, :destroy, :add_post, :remove_post ]
 
   def index
     @albums = Album.all.order(event_date: :desc)
@@ -13,7 +13,7 @@ class Admin::AlbumsController < Admin::BaseController
   def create
     @album = Album.new(album_params)
     @album.cover_image.attach(params[:album][:cover_image]) if params[:album][:cover_image].present?
-    
+
     if @album.save
       # Add selected posts after creation
       if params[:album][:post_ids].present?
@@ -35,14 +35,14 @@ class Admin::AlbumsController < Admin::BaseController
 
   def update
     @album.cover_image.attach(params[:album][:cover_image]) if params[:album][:cover_image].present?
-    
+
     # Add new posts if selected
     if params[:album][:post_ids].present?
       params[:album][:post_ids].each do |post_id|
         @album.posts << Post.find(post_id) unless post_id.blank? || @album.posts.pluck(:id).include?(post_id.to_i)
       end
     end
-    
+
     if @album.update(album_params)
       redirect_to admin_albums_path, notice: "Album updated successfully."
     else
@@ -56,7 +56,7 @@ class Admin::AlbumsController < Admin::BaseController
     @album.destroy
     redirect_to admin_albums_path, notice: "Album deleted."
   end
-  
+
   def add_post
     post = Post.find(params[:post_id])
     unless @album.posts.include?(post)
@@ -67,7 +67,7 @@ class Admin::AlbumsController < Admin::BaseController
     end
     redirect_to edit_admin_album_path(@album)
   end
-  
+
   def remove_post
     post = Post.find(params[:post_id])
     @album.posts.delete(post)

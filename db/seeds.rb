@@ -7,7 +7,7 @@
 #   ["Action", "Comedy", "Drama", "Horror"].each do |genre_name|
 #     MovieGenre.find_or_create_by!(name: genre_name)
 #   end
-#AdminUser.create!(email: 'admin@school.com', password: 'password123', password_confirmation: 'password123', admin_code: 'ADMIN001')
+# AdminUser.create!(email: 'admin@school.com', password: 'password123', password_confirmation: 'password123', admin_code: 'ADMIN001')
 
 
 
@@ -27,7 +27,7 @@ campuses = [
   { name: "Al-Nafay Campus", address: "DHA, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Wasay Campus", address: "WAPDA Town, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Ahad Campus", address: "Buch Villas, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
-  
+
   # Sub-Premium Campuses
   { name: "Al-Mustafa Premium Campus-1", address: "Gulshan Market, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Mustafa Premium Campus-2", address: "Masoom Shah Road, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
@@ -36,7 +36,7 @@ campuses = [
   { name: "Ahmad Campus", address: "Shareef Mall, Katchery Road, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Kareem Campus", address: "18-A, Officers Colony, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Bari Campus", address: "196 Taunsa Street, Garden Town, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
-  
+
   # Multan Campuses
   { name: "Al-Samee Campus", address: "Officers Colony, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Noor Campus", address: "Nasheman Colony, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
@@ -52,11 +52,11 @@ campuses = [
   { name: "Al-Salam Campus", address: "Zakariya Town, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Mateen Campus", address: "Shah Rukhn E Alam Housing Scheme, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Qawi Campus", address: "Shah Rukhn E Alam Housing Scheme, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
-  
+
   # Colleges
   { name: "BICN Boys", address: "Officers Colony, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "BICN Girls", address: "Tehsil Chowk, Bosan Road, Multan", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Fatima Ali" },
-  
+
   # Out of Station Campuses
   { name: "Al-Basit Campus", address: "9-10, Irshad Colony, Khanewal", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
   { name: "Al-Samad Campus", address: "Opposite Nishane Haider Petrol Pump, Near Tableghi Markaz Khanewal", phone: "+92 61 6510477", email: "info@british.edu.pk", principal_name: "Prof. Ahmad Raza" },
@@ -179,7 +179,7 @@ if AdminUser.count == 0
     role: "super_admin",
     admin_code: 'mmm00000'
   )
-  
+
   AdminUser.create!(
     email: "manager@school.com",
     password: "password123",

@@ -1,6 +1,6 @@
 # app/controllers/admin/news_controller.rb
 class Admin::NewsController < Admin::BaseController
-  before_action :set_news, only: [:edit, :update, :destroy, :remove_media]
+  before_action :set_news, only: [ :edit, :update, :destroy, :remove_media ]
 
   def index
     @news = policy_scope(News).includes(media_file: { file_attachment: :blob }).order(published_at: :desc)
@@ -16,7 +16,7 @@ class Admin::NewsController < Admin::BaseController
   def create
     authorize News
     @news = News.new(news_params)
-    
+
     if @news.save
       redirect_to admin_news_index_path, notice: "News created successfully."
     else
@@ -39,7 +39,7 @@ class Admin::NewsController < Admin::BaseController
       flash[:alert] = "Failed to remove media."
     end
     redirect_back fallback_location: edit_admin_news_path(@news)
-  end    
+  end
 
   def update
     authorize @news
@@ -66,7 +66,7 @@ class Admin::NewsController < Admin::BaseController
   def news_params
     params.require(:news).permit(
       :title, :content, :campus_id,
-      media_file_attributes: [:id, :file, :_destroy]
+      media_file_attributes: [ :id, :file, :_destroy ]
     )
   end
 end

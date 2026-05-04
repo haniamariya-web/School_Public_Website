@@ -1,6 +1,6 @@
 # app/controllers/admin/inquiries_controller.rb
 class Admin::InquiriesController < Admin::BaseController
-  before_action :set_inquiry, only: [:mark_contacted]
+  before_action :set_inquiry, only: [ :mark_contacted ]
   before_action :authorize_inquiry
 
   def index

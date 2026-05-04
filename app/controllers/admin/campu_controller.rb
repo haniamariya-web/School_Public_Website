@@ -1,6 +1,6 @@
 # app/controllers/admin/campu_controller.rb
 class Admin::CampuController < Admin::BaseController
-  before_action :set_campus, only: [:edit, :update, :destroy]
+  before_action :set_campus, only: [ :edit, :update, :destroy ]
   before_action :authorize_campus
 
   def index

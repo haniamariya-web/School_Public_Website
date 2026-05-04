@@ -12,7 +12,7 @@ class MediaFile < ApplicationRecord
 
   def validate_file_type
     return unless file.attached?
-    unless file.content_type.start_with?('image/', 'video/')
+    unless file.content_type.start_with?("image/", "video/")
       errors.add(:file, "must be an image or video")
     end
   end

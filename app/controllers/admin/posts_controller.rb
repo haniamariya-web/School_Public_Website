@@ -1,6 +1,6 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: [:edit, :update, :destroy, :remove_media]
-  before_action :authorize_post, only: [:edit, :update, :destroy, :remove_media]
+  before_action :set_post, only: [ :edit, :update, :destroy, :remove_media ]
+  before_action :authorize_post, only: [ :edit, :update, :destroy, :remove_media ]
 
   def index
     @posts = policy_scope(Post).includes(media_file: { file_attachment: :blob }).order(created_at: :desc)
@@ -44,7 +44,7 @@ class Admin::PostsController < Admin::BaseController
     @post.destroy
     redirect_to admin_posts_path, notice: "Post deleted."
   end
-  
+
   def remove_media
     authorize @post
     if @post.media_file.present?
@@ -69,7 +69,7 @@ class Admin::PostsController < Admin::BaseController
   def post_params
     params.require(:post).permit(
       :title, :content, :campus_id, :published_at,
-      media_file_attributes: [:id, :file, :_destroy]
+      media_file_attributes: [ :id, :file, :_destroy ]
     )
   end
 end

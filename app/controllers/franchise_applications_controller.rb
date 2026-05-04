@@ -1,6 +1,4 @@
 class FranchiseApplicationsController < ApplicationController
-
-  
   def new
     @franchise_application = FranchiseApplication.new
   end
@@ -8,25 +6,25 @@ class FranchiseApplicationsController < ApplicationController
   def create
     @franchise_application = FranchiseApplication.new(franchise_application_params)
     @franchise_application.status = "pending_payment"
-    
+
     if @franchise_application.save
       # Create Stripe PaymentIntent
       stripe_payment_intent = Stripe::PaymentIntent.create(
         amount: FranchiseApplication::FRANCHISE_FEE,
-        currency: 'usd',
+        currency: "usd",
         metadata: {
           franchise_application_id: @franchise_application.id,
           applicant_email: @franchise_application.email,
           applicant_name: @franchise_application.name
         }
       )
-      
+
       @franchise_application.update(stripe_payment_intent_id: stripe_payment_intent.id)
-      
+
       # Store in session and redirect
       session[:client_secret] = stripe_payment_intent.client_secret
       session[:application_id] = @franchise_application.id
-      
+
       redirect_to franchise_payment_path
     else
       render :new, status: :unprocessable_entity

@@ -5,7 +5,7 @@ class InquiryMailer < ApplicationMailer
   def inquiry_received(inquiry)
     @inquiry = inquiry
     mail(
-      to: "hanniaswork@gmail.com", 
+      to: "hanniaswork@gmail.com",
       subject: "New Website Inquiry from #{inquiry.name}"
     )
   end
