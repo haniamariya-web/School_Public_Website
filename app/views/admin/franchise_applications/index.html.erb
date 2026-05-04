@@ -1,0 +1,73 @@
+<div class="space-y-6">
+  <div class="flex justify-between items-center">
+    <h1 class="text-2xl font-bold text-navy">Franchise Applications</h1>
+  </div>
+
+  <div class="grid grid-cols-1 md:grid-cols-4 gap-4 mb-6">
+    <div class="bg-white rounded-lg shadow p-4 border-l-4 border-navy">
+      <h3 class="text-sm font-medium text-gray-500">Total</h3>
+      <p class="text-2xl font-bold text-gray-900"><%= @total_count %></p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4 border-l-4 border-yellow-500">
+      <h3 class="text-sm font-medium text-gray-500">Pending Payment</h3>
+      <p class="text-2xl font-bold text-gray-900"><%= @pending_payment_count %></p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4 border-l-4 border-blue-500">
+      <h3 class="text-sm font-medium text-gray-500">Payment Received</h3>
+      <p class="text-2xl font-bold text-gray-900"><%= @payment_received_count %></p>
+    </div>
+    <div class="bg-white rounded-lg shadow p-4 border-l-4 border-green-500">
+      <h3 class="text-sm font-medium text-gray-500">Approved</h3>
+      <p class="text-2xl font-bold text-gray-900"><%= @approved_count %></p>
+    </div>
+  </div>
+
+  <div class="bg-white rounded-lg shadow overflow-hidden">
+    <table class="min-w-full divide-y divide-gray-200">
+      <thead class="bg-gray-50">
+        <tr>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Applicant</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Contact</th>
+          <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Status</th>
+          <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
+        </tr>
+      </thead>
+      <tbody class="bg-white divide-y divide-gray-200">
+        <% @applications.each do |application| %>
+          <tr class="hover:bg-gray-50">
+            <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+              <%= application.created_at.strftime("%b %d, %Y") %>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm font-medium text-gray-900"><%= application.name %></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <div class="text-sm text-gray-500"><%= application.email %></div>
+              <div class="text-sm text-gray-500"><%= application.phone %></div>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap">
+              <% status_color = case application.status
+                 when 'pending_payment' then 'bg-yellow-100 text-yellow-800'
+                 when 'payment_received' then 'bg-blue-100 text-blue-800'
+                 when 'approved' then 'bg-green-100 text-green-800'
+                 when 'rejected' then 'bg-red-100 text-red-800'
+                 else 'bg-gray-100 text-gray-800' end %>
+              <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full <%= status_color %>">
+                <%= application.status.titleize %>
+              </span>
+            </td>
+            <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
+              <%= link_to 'View Details', admin_franchise_application_path(application), class: "text-british-red hover:text-red-900" %>
+            </td>
+          </tr>
+        <% end %>
+        <% if @applications.empty? %>
+          <tr>
+            <td colspan="5" class="px-6 py-8 text-center text-gray-500">No applications found.</td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

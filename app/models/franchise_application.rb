@@ -4,8 +4,14 @@ class FranchiseApplication < ApplicationRecord
   has_one :franchise_payment
   has_many :franchise_documents
 
-  validates :name, :email, :phone, :address, presence: true
-  validates :email, format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :name, presence: true, length: { maximum: 100 }
+  validates :email, presence: true, 
+                    format: { with: URI::MailTo::EMAIL_REGEXP },
+                    length: { maximum: 255 }
+  validates :phone, presence: true,
+                    format: { with: /\A\+?[\d\s\-()]{7,20}\z/, message: "must be a valid phone number" },
+                    length: { maximum: 20 }
+  validates :address, presence: true, length: { maximum: 500 }
   validates :status, presence: true
 
   enum :status, {

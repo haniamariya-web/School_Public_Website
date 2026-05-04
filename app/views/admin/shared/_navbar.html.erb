@@ -3,7 +3,7 @@
     <div class="flex justify-between items-center py-4 md:py-5">
       
       <%= link_to root_path, class: "flex items-center space-x-3 group" do %>
-        <span class="text-3xl md:text-4xl text-british-red font-playfair tracking-tight group-hover:text-red-500 transition-colors">BIS</span>
+        <span class="text-3xl md:text-4xl text-british-red font-playfair tracking-tight group-hover:text-red-500 transition-colors">BISS</span>
         <span class="text-[15px] font-light tracking-wider leading-snug border-l border-white/20 pl-3 hidden sm:block text-gray-200">
           Britain International School<br>
           <span class="text-xs font-medium text-gray-400">Admin Portal</span>
@@ -21,6 +21,10 @@
         ].each do |name, path| %>
           <%= link_to name, path, 
               class: "transition-all duration-300 text-[15px] font-medium tracking-wide pb-1 border-b-2 #{current_page?(path) || (name != 'Dashboard' && request.path.include?(name.downcase.singularize)) ? 'border-british-red text-white' : 'border-transparent text-gray-300 hover:text-british-red'}" %>
+        <% end %>
+        <% if current_admin_user.super_admin? %>
+          <%= link_to 'Franchises', admin_franchise_applications_path, 
+              class: "transition-all duration-300 text-[15px] font-medium tracking-wide pb-1 border-b-2 #{request.path.include?('franchise_applications') ? 'border-british-red text-white' : 'border-transparent text-gray-300 hover:text-british-red'}" %>
         <% end %>
       </div>
       
@@ -57,6 +61,10 @@
         ].each do |name, path| %>
           <%= link_to name, path, 
               class: "text-lg font-medium tracking-wide hover:text-british-red transition-colors #{current_page?(path) || (name != 'Dashboard' && request.path.include?(name.downcase.singularize)) ? 'text-british-red' : 'text-gray-100'}" %>
+        <% end %>
+        <% if current_admin_user.super_admin? %>
+          <%= link_to 'Franchises', admin_franchise_applications_path, 
+              class: "text-lg font-medium tracking-wide hover:text-british-red transition-colors #{request.path.include?('franchise_applications') ? 'text-british-red' : 'text-gray-100'}" %>
         <% end %>
 
         <div class="pt-4">

@@ -1,4 +1,4 @@
-<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 mt-10">
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 mt-10 mb-10">
   <h1 class="text-3xl font-bold text-navy mb-2">Buy a Franchise</h1>
   <p class="text-gray-600 mb-6">Complete the form below to start your franchise journey</p>
 
@@ -16,22 +16,22 @@
 
     <div>
       <%= f.label :name, class: "block text-navy font-semibold mb-2" %>
-      <%= f.text_field :name, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+      <%= f.text_field :name, required: true, maxlength: 100, placeholder: "Full Name", class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
     </div>
 
     <div>
       <%= f.label :email, class: "block text-navy font-semibold mb-2" %>
-      <%= f.email_field :email, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+      <%= f.email_field :email, required: true, maxlength: 255, placeholder: "email@example.com", class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
     </div>
 
     <div>
       <%= f.label :phone, class: "block text-navy font-semibold mb-2" %>
-      <%= f.telephone_field :phone, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+      <%= f.telephone_field :phone, required: true, maxlength: 20, placeholder: "+1 (555) 000-0000", class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
     </div>
 
     <div>
       <%= f.label :address, class: "block text-navy font-semibold mb-2" %>
-      <%= f.text_area :address, rows: 3, required: true, class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
+      <%= f.text_area :address, rows: 3, required: true, maxlength: 500, placeholder: "Street, City, State, Zip Code", class: "w-full border border-gray-300 rounded-lg p-2 focus:ring-british-red focus:border-british-red" %>
     </div>
 
     <div class="bg-gray-50 p-4 rounded-lg mb-4">

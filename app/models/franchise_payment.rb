@@ -4,13 +4,13 @@ class FranchisePayment < ApplicationRecord
   validates :stripe_payment_intent_id, :amount, :status, presence: true
   validates :amount, numericality: { greater_than: 0 }
 
-  enum status: {
+  enum :status, {
     succeeded: "succeeded",
     failed: "failed",
     refunded: "refunded"
   }
 
-  after_create :update_franchise_application_status
+  after_save :update_franchise_application_status
 
   private
 
