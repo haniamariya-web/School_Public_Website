@@ -17,9 +17,9 @@ class Admin::CampuController < Admin::BaseController
     authorize Campu  # ✅ Changed
     @campus = Campu.new(campus_params)
     if @campus.save
-      redirect_to admin_campu_index_path, notice: "Campus created successfully."
+      redirect_to admin_campu_index_path, notice: t("flash.admin.campuses.created")
     else
-      flash.now[:alert] = "Unable to create campus. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.campuses.create_failed")
       render :new, status: :unprocessable_entity
     end
   end
@@ -31,9 +31,9 @@ class Admin::CampuController < Admin::BaseController
   def update
     authorize @campus  # ✅ Add this line
     if @campus.update(campus_params)
-      redirect_to admin_campu_index_path, notice: "Campus updated successfully."
+      redirect_to admin_campu_index_path, notice: t("flash.admin.campuses.updated")
     else
-      flash.now[:alert] = "Unable to update campus. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.campuses.update_failed")
       render :edit, status: :unprocessable_entity
     end
   end
@@ -41,7 +41,7 @@ class Admin::CampuController < Admin::BaseController
   def destroy
     authorize @campus  # ✅ Add this line
     @campus.destroy
-    redirect_to admin_campu_index_path, notice: "Campus deleted."
+    redirect_to admin_campu_index_path, notice: t("flash.admin.campuses.deleted")
   end
 
   private

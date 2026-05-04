@@ -21,10 +21,10 @@ class Admin::AlbumsController < Admin::BaseController
           @album.posts << Post.find(post_id) unless post_id.blank?
         end
       end
-      redirect_to admin_albums_path, notice: "Album created successfully."
+      redirect_to admin_albums_path, notice: t("flash.admin.albums.created")
     else
       @available_posts = Post.all.order(created_at: :desc)
-      flash.now[:alert] = "Unable to create album. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.albums.create_failed")
       render :new, status: :unprocessable_entity
     end
   end
@@ -44,26 +44,26 @@ class Admin::AlbumsController < Admin::BaseController
     end
 
     if @album.update(album_params)
-      redirect_to admin_albums_path, notice: "Album updated successfully."
+      redirect_to admin_albums_path, notice: t("flash.admin.albums.updated")
     else
       @available_posts = Post.where.not(id: @album.posts.pluck(:id)).order(created_at: :desc)
-      flash.now[:alert] = "Unable to update album. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.albums.update_failed")
       render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
     @album.destroy
-    redirect_to admin_albums_path, notice: "Album deleted."
+    redirect_to admin_albums_path, notice: t("flash.admin.albums.deleted")
   end
 
   def add_post
     post = Post.find(params[:post_id])
     unless @album.posts.include?(post)
       @album.posts << post
-      flash[:notice] = "Post added to album."
+      flash[:notice] = t("flash.admin.albums.post_added")
     else
-      flash[:alert] = "Post already in album."
+      flash[:alert] = t("flash.admin.albums.post_already_in")
     end
     redirect_to edit_admin_album_path(@album)
   end
@@ -71,7 +71,7 @@ class Admin::AlbumsController < Admin::BaseController
   def remove_post
     post = Post.find(params[:post_id])
     @album.posts.delete(post)
-    redirect_to edit_admin_album_path(@album), notice: "Post removed from album."
+    redirect_to edit_admin_album_path(@album), notice: t("flash.admin.albums.post_removed")
   end
 
   private

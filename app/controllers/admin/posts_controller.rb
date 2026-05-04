@@ -17,10 +17,10 @@ class Admin::PostsController < Admin::BaseController
     @post = Post.new(post_params)
     authorize @post
     if @post.save
-      redirect_to admin_posts_path, notice: "Post created successfully."
+      redirect_to admin_posts_path, notice: t("flash.admin.posts.created")
     else
       @post.build_media_file unless @post.media_file
-      flash.now[:alert] = "Unable to create post. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.posts.create_failed")
       render :new, status: :unprocessable_entity
     end
   end
@@ -32,9 +32,9 @@ class Admin::PostsController < Admin::BaseController
   def update
     authorize @post
     if @post.update(post_params)
-      redirect_to admin_posts_path, notice: "Post updated successfully."
+      redirect_to admin_posts_path, notice: t("flash.admin.posts.updated")
     else
-      flash.now[:alert] = "Unable to update post. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.posts.update_failed")
       render :edit, status: :unprocessable_entity
     end
   end
@@ -42,16 +42,16 @@ class Admin::PostsController < Admin::BaseController
   def destroy
     authorize @post
     @post.destroy
-    redirect_to admin_posts_path, notice: "Post deleted."
+    redirect_to admin_posts_path, notice: t("flash.admin.posts.deleted")
   end
 
   def remove_media
     authorize @post
     if @post.media_file.present?
       @post.media_file.destroy
-      notice_msg = "Media removed."
+      notice_msg = t("flash.admin.posts.media_removed")
     else
-      notice_msg = "No media found to remove."
+      notice_msg = t("flash.admin.posts.no_media_found")
     end
     redirect_to edit_admin_post_path(@post), notice: notice_msg
   end

@@ -18,10 +18,10 @@ class Admin::NewsController < Admin::BaseController
     @news = News.new(news_params)
 
     if @news.save
-      redirect_to admin_news_index_path, notice: "News created successfully."
+      redirect_to admin_news_index_path, notice: t("flash.admin.news.created")
     else
       @news.build_media_file unless @news.media_file
-      flash.now[:alert] = "Unable to create news item. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.news.create_failed")
       render :new, status: :unprocessable_entity
     end
   end
@@ -34,9 +34,9 @@ class Admin::NewsController < Admin::BaseController
   def remove_media
     authorize @news
     if @news.media_file&.destroy
-      flash[:notice] = "Media removed successfully."
+      flash[:notice] = t("flash.admin.news.media_removed")
     else
-      flash[:alert] = "Failed to remove media."
+      flash[:alert] = t("flash.admin.news.media_remove_failed")
     end
     redirect_back fallback_location: edit_admin_news_path(@news)
   end
@@ -44,9 +44,9 @@ class Admin::NewsController < Admin::BaseController
   def update
     authorize @news
     if @news.update(news_params)
-      redirect_to admin_news_index_path, notice: "News updated successfully."
+      redirect_to admin_news_index_path, notice: t("flash.admin.news.updated")
     else
-      flash.now[:alert] = "Unable to update news item. Fix the errors below."
+      flash.now[:alert] = t("flash.admin.news.update_failed")
       render :edit, status: :unprocessable_entity
     end
   end
@@ -54,7 +54,7 @@ class Admin::NewsController < Admin::BaseController
   def destroy
     authorize @news
     @news.destroy
-    redirect_to admin_news_index_path, notice: "News deleted."
+    redirect_to admin_news_index_path, notice: t("flash.admin.news.deleted")
   end
 
   private
