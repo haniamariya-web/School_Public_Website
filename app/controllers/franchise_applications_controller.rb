@@ -9,15 +9,7 @@ class FranchiseApplicationsController < ApplicationController
 
     if @franchise_application.save
       # Create Stripe PaymentIntent
-      stripe_payment_intent = Stripe::PaymentIntent.create(
-        amount: FranchiseApplication::FRANCHISE_FEE,
-        currency: "usd",
-        metadata: {
-          franchise_application_id: @franchise_application.id,
-          applicant_email: @franchise_application.email,
-          applicant_name: @franchise_application.name
-        }
-      )
+      stripe_payment_intent = StripePaymentService.create_franchise_payment_intent(@franchise_application)
 
       @franchise_application.update(stripe_payment_intent_id: stripe_payment_intent.id)
 

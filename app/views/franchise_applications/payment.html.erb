@@ -1,7 +1,9 @@
-
-<meta name="turbo-visit-control" content="reload">
-
-<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 mt-10">
+<div class="max-w-2xl mx-auto bg-white rounded-lg shadow-md p-8 mt-10"
+     data-controller="stripe-payment"
+     data-stripe-payment-public-key-value="<%= Rails.application.credentials.dig(:stripe, :publishable_key) %>"
+     data-stripe-payment-client-secret-value="<%= @client_secret %>"
+     data-stripe-payment-return-url-value="<%= franchise_applications_success_url %>">
+  
   <h1 class="text-3xl font-bold text-navy mb-2">Complete Payment</h1>
   <p class="text-gray-600 mb-6">Pay the franchise fee to complete your application</p>
 
@@ -10,44 +12,11 @@
     <p class="text-sm text-gray-600">Franchise Fee: <strong class="text-navy">$500</strong></p>
   </div>
 
-  <div id="payment-element"></div>
-  <button id="submit-payment" class="w-full bg-british-red text-white py-3 rounded-lg hover:bg-red-700 transition font-semibold mt-4">
+  <div data-stripe-payment-target="paymentElement" class="min-h-[200px]"></div>
+  
+  <button data-stripe-payment-target="submitButton" data-action="click->stripe-payment#submit" class="w-full bg-british-red text-white py-3 rounded-lg hover:bg-red-700 transition font-semibold mt-4 disabled:opacity-50">
     Pay $500
   </button>
-  <div id="error-message" class="text-red-600 text-sm mt-2"></div>
-</div>
-
-<script src="https://js.stripe.com/v3/"></script>
-<script>
-  function initStripe() {
-    // Check if already initialized to avoid duplicates
-    if (window.stripeInitialized) return;
-    window.stripeInitialized = true;
-    
-    const stripe = Stripe('<%= Rails.application.credentials.dig(:stripe, :publishable_key) %>');
-    const clientSecret = '<%= @client_secret %>';
-    
-    const elements = stripe.elements({ clientSecret });
-    const paymentElement = elements.create('payment');
-    paymentElement.mount('#payment-element');
-
-    const submitButton = document.getElementById('submit-payment');
-    submitButton.addEventListener('click', async () => {
-      const { error } = await stripe.confirmPayment({
-        elements,
-        confirmParams: {
-          return_url: '<%= franchise_applications_success_url %>',
-        },
-      });
-
-      if (error) {
-        document.getElementById('error-message').innerText = error.message;
-      }
-    });
-  }
   
-  // Turbo Rails 8 event
-  document.addEventListener('turbo:load', initStripe);
-  // Fallback for normal page load
-  document.addEventListener('DOMContentLoaded', initStripe);
-</script>
+  <div data-stripe-payment-target="errorMessage" class="text-red-600 text-sm mt-2"></div>
+</div>
