@@ -4,6 +4,9 @@ class Admin::BaseController < ApplicationController
 
   rescue_from ActiveRecord::RecordNotFound, with: :admin_record_not_found
   rescue_from ActionController::ParameterMissing, with: :admin_bad_request
+  rescue_from Pundit::NotAuthorizedError do |exception|
+    redirect_to admin_root_path, alert: "Access denied. You don't have permission to perform this action."
+  end
 
   private
 

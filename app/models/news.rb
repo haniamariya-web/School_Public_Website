@@ -12,7 +12,7 @@ class News < ApplicationRecord
   scope :recent, -> { order(published_at: :desc).limit(5) }
 
   def has_media?
-    image.attached? || video.attached?
+    media_file&.file&.attached?
   end
 
   private

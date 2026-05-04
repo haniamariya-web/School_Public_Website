@@ -173,7 +173,7 @@ puts "Created #{Result.count} results"
 if AdminUser.count == 0
   puts "Creating admin user..."
   AdminUser.create!(
-    email: "admin@school.com",
+    email: "superadmin@school.com",
     password: "password123",
     password_confirmation: "password123",
     role: "super_admin",

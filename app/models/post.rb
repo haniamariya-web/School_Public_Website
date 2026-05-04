@@ -11,17 +11,7 @@ class Post < ApplicationRecord
   before_create :set_published_at
 
   def has_media?
-    media.attached?
-  end
-  
-  private
-  
-  def validate_media_type
-    if media.attached?
-      unless media.content_type.start_with?('image/', 'video/')
-        errors.add(:media, "must be an image or video")
-      end
-    end
+    media_file&.file&.attached?
   end
 
   private

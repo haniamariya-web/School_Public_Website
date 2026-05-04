@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
+ActiveRecord::Schema[8.1].define(version: 2026_04_30_150332) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -64,6 +64,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
     t.datetime "remember_created_at"
     t.datetime "reset_password_sent_at"
     t.string "reset_password_token"
+    t.string "role"
     t.datetime "updated_at", null: false
     t.index ["email"], name: "index_admin_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_admin_users_on_reset_password_token", unique: true
@@ -100,6 +101,31 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "franchise_applications", force: :cascade do |t|
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.string "email"
+    t.string "name"
+    t.string "phone"
+    t.string "status"
+    t.string "stripe_payment_intent_id"
+    t.datetime "updated_at", null: false
+    t.index ["stripe_payment_intent_id"], name: "index_franchise_applications_on_stripe_payment_intent_id"
+  end
+
+  create_table "franchise_payments", force: :cascade do |t|
+    t.integer "amount"
+    t.string "card_last4"
+    t.datetime "created_at", null: false
+    t.integer "franchise_application_id"
+    t.datetime "paid_at"
+    t.string "receipt_url"
+    t.string "status"
+    t.string "stripe_payment_intent_id"
+    t.datetime "updated_at", null: false
+    t.index ["stripe_payment_intent_id"], name: "index_franchise_payments_on_stripe_payment_intent_id"
+  end
+
   create_table "inquiries", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.string "email"
@@ -110,6 +136,14 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
     t.integer "preferred_call_time"
     t.integer "status"
     t.datetime "updated_at", null: false
+  end
+
+  create_table "media_files", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.bigint "mediable_id", null: false
+    t.string "mediable_type", null: false
+    t.datetime "updated_at", null: false
+    t.index ["mediable_type", "mediable_id"], name: "index_media_files_on_mediable"
   end
 
   create_table "news", force: :cascade do |t|
@@ -151,6 +185,7 @@ ActiveRecord::Schema[8.1].define(version: 2026_04_24_074835) do
   add_foreign_key "album_posts", "albums"
   add_foreign_key "album_posts", "posts"
   add_foreign_key "albums", "campus", column: "campus_id"
+  add_foreign_key "franchise_payments", "franchise_applications"
   add_foreign_key "news", "campus", column: "campus_id"
   add_foreign_key "posts", "campus", column: "campus_id"
   add_foreign_key "results", "campus", column: "campus_id"

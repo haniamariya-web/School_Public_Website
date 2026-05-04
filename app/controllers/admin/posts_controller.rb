@@ -3,56 +3,67 @@ class Admin::PostsController < Admin::BaseController
   before_action :authorize_post, only: [ :edit, :update, :destroy, :remove_media ]
 
   def index
-    @posts = Post.all.order(created_at: :desc)
+    @posts = policy_scope(Post).includes(media_file: { file_attachment: :blob }).order(created_at: :desc)
+    authorize Post
   end
 
   def new
     @post = Post.new
+    @post.build_media_file
+    authorize @post
   end
 
   def create
     @post = Post.new(post_params)
+    authorize @post
     if @post.save
       redirect_to admin_posts_path, notice: "Post created successfully."
     else
-      flash.discard
+      @post.build_media_file unless @post.media_file
       flash.now[:alert] = "Unable to create post. Fix the errors below."
-      render :new
+      render :new, status: :unprocessable_entity
     end
   end
 
   def edit
+    @post.build_media_file unless @post.media_file
   end
 
   def update
+    authorize @post
     if @post.update(post_params)
       redirect_to admin_posts_path, notice: "Post updated successfully."
     else
-      flash.discard
       flash.now[:alert] = "Unable to update post. Fix the errors below."
-      render :edit
+      render :edit, status: :unprocessable_entity
     end
   end
 
   def destroy
+    authorize @post
     @post.destroy
     redirect_to admin_posts_path, notice: "Post deleted."
   end
 
   def remove_media
-    if @post.media.attached?
-      @post.media.purge
-      puts "Media purged successfully"
+    authorize @post
+    if @post.media_file.present?
+      @post.media_file.destroy
+      notice_msg = "Media removed."
     else
-      puts "No media found"
+      notice_msg = "No media found to remove."
     end
-    redirect_to edit_admin_post_path(@post), notice: "Media removed."
+    redirect_to edit_admin_post_path(@post), notice: notice_msg
   end
-  
+
   private
 
   def set_post
     @post = Post.find(params[:id])
+  end
+
+  def authorize_post
+    authorize @post
   end
 
   def post_params
