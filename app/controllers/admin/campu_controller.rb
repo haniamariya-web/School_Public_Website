@@ -1,5 +1,5 @@
 class Admin::CampuController < Admin::BaseController
-  before_action :set_campu, only: [:edit, :update, :destroy]
+  before_action :set_campus, only: [ :edit, :update, :destroy ]
 
   def index
     @campuses = Campu.all.order(:name)

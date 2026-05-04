@@ -1,7 +1,7 @@
 class CampusesController < ApplicationController
   def index
     all_campuses = Campu.order(:id).to_a
-    
+
     @categories = {
       premium: { title: "Premium Campuses", campuses: [] },
       sub_premium: { title: "Sub-Premium Campuses", campuses: [] },
@@ -23,7 +23,7 @@ class CampusesController < ApplicationController
         @categories[:out_of_station][:campuses] << campus
       end
     end
-    
+
     # Remove any categories that end up empty
     @categories.reject! { |_, data| data[:campuses].empty? }
   end

@@ -1,5 +1,5 @@
 class Admin::NewsController < Admin::BaseController
-  before_action :set_news, only: [:edit, :update, :destroy]
+  before_action :set_news, only: [ :edit, :update, :destroy, :remove_media ]
 
   def index
     @news = News.all.order(published_at: :desc)
@@ -11,11 +11,6 @@ class Admin::NewsController < Admin::BaseController
 
   def create
     @news = News.new(news_params)
-    
-    # Handle file attachments
-    @news.image.attach(params[:news][:image]) if params[:news][:image].present?
-    @news.video.attach(params[:news][:video]) if params[:news][:video].present?
-    
     if @news.save
       redirect_to admin_news_index_path, notice: "News created successfully."
     else
@@ -25,6 +20,16 @@ class Admin::NewsController < Admin::BaseController
   end
 
   def edit
+  end
+
+  def remove_media
+    authorize @news
+    if @news.media_file&.destroy
+      flash[:notice] = "Media removed successfully."
+    else
+      flash[:alert] = "Failed to remove media."
+    end
+    redirect_back fallback_location: edit_admin_news_path(@news)
   end
 
   def update
@@ -51,6 +56,9 @@ class Admin::NewsController < Admin::BaseController
   end
 
   def news_params
-    params.require(:news).permit(:title, :content)
+    params.require(:news).permit(
+      :title, :content, :campus_id,
+      media_file_attributes: [ :id, :file, :_destroy ]
+    )
   end
 end

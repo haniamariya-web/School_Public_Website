@@ -16,4 +16,8 @@ class Admin::BaseController < ApplicationController
     flash[:alert] = "Invalid admin request. Please check your input and try again."
     redirect_to request.referrer || admin_root_path
   end
+
+  def pundit_user
+    current_admin_user
+  end
 end

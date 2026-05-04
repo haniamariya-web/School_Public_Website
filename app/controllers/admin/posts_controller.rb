@@ -1,5 +1,6 @@
 class Admin::PostsController < Admin::BaseController
-  before_action :set_post, only: [:edit, :update, :destroy, :remove_media]
+  before_action :set_post, only: [ :edit, :update, :destroy, :remove_media ]
+  before_action :authorize_post, only: [ :edit, :update, :destroy, :remove_media ]
 
   def index
     @posts = Post.all.order(created_at: :desc)
@@ -37,7 +38,7 @@ class Admin::PostsController < Admin::BaseController
     @post.destroy
     redirect_to admin_posts_path, notice: "Post deleted."
   end
-  
+
   def remove_media
     if @post.media.attached?
       @post.media.purge
@@ -55,6 +56,9 @@ class Admin::PostsController < Admin::BaseController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :campus_id, :published_at, :media)
+    params.require(:post).permit(
+      :title, :content, :campus_id, :published_at,
+      media_file_attributes: [ :id, :file, :_destroy ]
+    )
   end
 end

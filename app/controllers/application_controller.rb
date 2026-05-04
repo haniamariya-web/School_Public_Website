@@ -19,4 +19,8 @@ class ApplicationController < ActionController::Base
     flash[:alert] = "Invalid request. Please check your input and try again."
     redirect_to request.referrer || root_path
   end
+
+  def user_not_authorized
+    redirect_to root_path, alert: "Not authorized"
+  end
 end

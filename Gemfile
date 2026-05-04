@@ -70,6 +70,7 @@ end
 
 gem "tailwindcss-rails", "~> 4.4"
 
-gem 'devise'
-gem 'pundit'
-gem 'simple_form'
+gem "devise"
+gem "pundit"
+gem "simple_form"
+gem "stripe"

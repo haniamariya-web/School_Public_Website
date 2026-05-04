@@ -1,5 +1,6 @@
 class Admin::InquiriesController < Admin::BaseController
-  before_action :set_inquiry, only: [:mark_contacted]
+  before_action :set_inquiry, only: [ :mark_contacted ]
+  before_action :authorize_inquiry
 
   def index
     @inquiries = Inquiry.order(created_at: :desc)
@@ -16,5 +17,9 @@ class Admin::InquiriesController < Admin::BaseController
 
   def set_inquiry
     @inquiry = Inquiry.find(params[:id])
+  end
+
+  def authorize_inquiry
+    authorize @inquiry if @inquiry
   end
 end

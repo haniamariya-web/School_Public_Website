@@ -6,7 +6,7 @@ class InquiriesController < ApplicationController
   def create
     @inquiry = Inquiry.new(inquiry_params)
     @inquiry.status = :pending
-    
+
     if @inquiry.save
       # Enqueue background job to send email
       InquiryEmailJob.perform_later(@inquiry.id)
