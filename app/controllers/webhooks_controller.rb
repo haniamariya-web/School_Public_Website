@@ -6,7 +6,7 @@ class WebhooksController < ApplicationController
     sig_header = request.env["HTTP_STRIPE_SIGNATURE"]
     endpoint_secret = STRIPE_WEBHOOK_SECRET
 
-    event = Stripe::Webhook.construct_event(payload, sig_header, endpoint_secret)
+    event = StripePaymentService.construct_event(payload, sig_header, endpoint_secret)
 
     Rails.logger.info "Webhook received: #{event.type}"
 
