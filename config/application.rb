@@ -19,6 +19,9 @@ module School2
     # Configure Sidekiq as the Active Job adapter
     config.active_job.queue_adapter = :sidekiq
 
+    # Use custom error routes instead of static public pages
+    config.exceptions_app = self.routes
+
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files
