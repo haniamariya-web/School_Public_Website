@@ -1,0 +1,16 @@
+<div class="min-h-[70vh] flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-2xl w-full space-y-8 text-center">
+    <div>
+      <h1 class="text-9xl font-extrabold text-british-red font-playfair tracking-tight">500</h1>
+      <h2 class="mt-6 text-4xl font-bold text-navy font-playfair">Internal Server Error</h2>
+      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+        Oops! Something went wrong on our end. We're looking into it right now.
+        Please try again later.
+      </p>
+    </div>
+    <div class="mt-10 flex justify-center space-x-4">
+      <%= link_to "Go Back Home", root_path, class: "inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-british-red hover:bg-red-800 transition-colors shadow-sm" %>
+      <%= link_to "Contact Us", new_inquiry_path, class: "inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-navy bg-white hover:bg-gray-50 transition-colors shadow-sm" %>
+    </div>
+  </div>
+</div>

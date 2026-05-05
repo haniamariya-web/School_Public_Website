@@ -1,0 +1,15 @@
+<div class="min-h-[70vh] flex items-center justify-center bg-gray-50 px-4 sm:px-6 lg:px-8 py-12">
+  <div class="max-w-2xl w-full space-y-8 text-center">
+    <div>
+      <h1 class="text-9xl font-extrabold text-navy font-playfair tracking-tight">422</h1>
+      <h2 class="mt-6 text-4xl font-bold text-navy font-playfair">Unprocessable Entity</h2>
+      <p class="mt-6 text-lg text-gray-600 leading-relaxed">
+        The action you attempted was rejected. This usually happens if you tried to submit data that was invalid or if you don't have permission to perform this action.
+      </p>
+    </div>
+    <div class="mt-10 flex justify-center space-x-4">
+      <%= link_to "Go Back", "javascript:history.back()", class: "inline-flex items-center justify-center px-6 py-3 border border-transparent text-base font-medium rounded-md text-white bg-navy hover:bg-blue-900 transition-colors shadow-sm" %>
+      <%= link_to "Go Home", root_path, class: "inline-flex items-center justify-center px-6 py-3 border border-gray-300 text-base font-medium rounded-md text-navy bg-white hover:bg-gray-50 transition-colors shadow-sm" %>
+    </div>
+  </div>
+</div>
