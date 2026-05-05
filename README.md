@@ -58,6 +58,7 @@ A full-featured, public-facing website for **Britain International School & Coll
 | **Campuses** | Manage all campus records (name, address, phone, email, principal) |
 | **Albums** | Create photo/video albums, attach posts, set cover images, organize by event date |
 | **Inquiries** | View all admission inquiries with status tracking (Pending → Contacted → Closed) |
+| **Franchise Apps** | Manage franchise applications, view payment details, and track status (Super Admin only) |
 
 ### 🛡️ Security & Authorization
 
@@ -93,6 +94,8 @@ A full-featured, public-facing website for **Britain International School & Coll
 | **Background Jobs** | Sidekiq (Redis-backed) |
 | **Deployment** | Docker, Kamal, Thruster |
 | **Web Server** | Puma |
+| **Internationalization** | Rails I18n (Centralized string management) |
+| **Testing** | RSpec |
 | **Code Quality** | RuboCop (Rails Omakase), Brakeman, Bundler Audit |
 
 ---
@@ -305,6 +308,7 @@ The application uses **Pundit** for policy-based authorization with two admin ro
 | **Albums** | Create / Edit | ✅ | ✅ |
 | **Albums** | Delete | ✅ | ❌ |
 | **Inquiries** | View / Mark Contacted | ✅ | ✅ |
+| **Franchise Apps** | View / Update Status | ✅ | ❌ |
 
 ---
 
@@ -329,9 +333,18 @@ The franchise application flow uses Stripe's **PaymentIntents API**:
 ```
 
 - **Franchise Fee**: $500 (50,000 cents)
+- **Service Object**: `StripePaymentService` encapsulates all API interactions (PaymentIntent creation, event construction)
 - **Credentials**: Stored in Rails encrypted credentials (`stripe.secret_key`, `stripe.webhook_secret`)
 - **Webhook Endpoint**: `POST /stripe/webhooks` with signature verification
 - **Payment Statuses**: `pending_payment` → `payment_received` → `approved` / `rejected`
+
+### Internationalization (i18n)
+
+The application uses Rails I18n to manage all user-facing constant strings, flash messages, and form labels. This ensures consistency and makes the app ready for future localization.
+
+- **Storage**: `config/locales/en.yml`
+- **Scopes**: Organized by controller and action (e.g., `t('flash.admin.news.created')`)
+- **Usage**: Centralized success/error messages for all CRUD operations
 
 ### Sidekiq (Background Jobs)
 
@@ -389,6 +402,7 @@ school2/
 │   │   │   ├── albums_controller.rb     # CRUD for albums
 │   │   │   ├── campu_controller.rb      # CRUD for campuses
 │   │   │   ├── inquiries_controller.rb  # Inquiry management
+│   │   │   ├── franchise_applications_controller.rb # Manage applications & payments
 │   │   │   └── sessions_controller.rb   # Devise session overrides
 │   │   ├── pages_controller.rb          # Home & About pages
 │   │   ├── campuses_controller.rb       # Public campus listing
@@ -563,18 +577,18 @@ bin/rails db:seed
 
 ## 🧪 Running Tests
 
+The project uses **RSpec** for unit, functional, and integration testing.
+
 ```bash
 # Run the full test suite
-bin/rails test
+bundle exec rspec
 
-# Run specific test files
-bin/rails test test/models/
-bin/rails test test/controllers/
+# Run specific specs
+bundle exec rspec spec/models/
+bundle exec rspec spec/requests/
 
-# Run system tests (requires Chrome/ChromeDriver)
-bin/rails test:system
-
-# Security audit
+# Security & Quality audits
+bundle exec rubocop
 bundle exec brakeman
 bundle exec bundler-audit check
 ```
