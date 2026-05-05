@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     resources :inquiries do
       patch :mark_contacted, on: :member
     end
-    resources :franchise_applications, only: [:index, :show, :update]
+    resources :franchise_applications, only: [ :index, :show, :update ]
     resources :albums do
       member do
         post :add_post

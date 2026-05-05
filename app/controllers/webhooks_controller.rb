@@ -9,7 +9,7 @@ class WebhooksController < ApplicationController
     event = StripePaymentService.construct_event(payload, sig_header, endpoint_secret)
 
     case event.type
-    when 'payment_intent.succeeded'
+    when "payment_intent.succeeded"
       payment_intent = event.data.object
       application = FranchiseApplication.find_by(stripe_payment_intent_id: payment_intent.id)
       if application
@@ -17,11 +17,11 @@ class WebhooksController < ApplicationController
         payment.update!(
           stripe_payment_intent_id: payment_intent.id,
           amount: payment_intent.amount,
-          status: 'succeeded',
+          status: "succeeded",
           paid_at: Time.current
         )
       end
-    when 'payment_intent.payment_failed'
+    when "payment_intent.payment_failed"
       payment_intent = event.data.object
       application = FranchiseApplication.find_by(stripe_payment_intent_id: payment_intent.id)
       if application
@@ -29,7 +29,7 @@ class WebhooksController < ApplicationController
         payment.update!(
           stripe_payment_intent_id: payment_intent.id,
           amount: payment_intent.amount,
-          status: 'failed'
+          status: "failed"
         )
       end
     end

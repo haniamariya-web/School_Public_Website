@@ -5,7 +5,7 @@ class FranchiseApplication < ApplicationRecord
   has_many :franchise_documents
 
   validates :name, presence: true, length: { maximum: 100 }
-  validates :email, presence: true, 
+  validates :email, presence: true,
                     format: { with: URI::MailTo::EMAIL_REGEXP },
                     length: { maximum: 255 }
   validates :phone, presence: true,
