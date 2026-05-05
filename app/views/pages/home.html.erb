@@ -144,7 +144,7 @@
   </div>
 
   <!-- Latest News Section -->
-  <% if (recent_news = News.published.limit(3)).any? %>
+  <% if @recent_news.any? %>
   <div class="py-16 sm:py-24 bg-gray-50 border-t border-gray-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex flex-col sm:flex-row sm:justify-between sm:items-end mb-8 sm:mb-12 reveal opacity-0 translate-y-10 transition-all duration-700">
@@ -156,8 +156,9 @@
       </div>
 
       <div class="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8">
-        <% recent_news.each_with_index do |news_item, idx| %>
-          <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden reveal opacity-0 translate-y-10 transition-all duration-700" style="transition-delay: <%= idx * 100 %>ms;">
+        <% @recent_news.each do |news_item| %>
+          <div class="bg-white rounded-xl shadow-sm hover:shadow-xl transition-shadow duration-300 border border-gray-100 overflow-hidden reveal opacity-0 translate-y-10 transition-all duration-700" 
+          style="transition-delay: 100 ms;">
             <% if news_item.media_file&.file&.attached? %>
               <% if news_item.media_file.file.content_type.start_with?('image/') %>
                 <div class="h-48 bg-gray-200 overflow-hidden">

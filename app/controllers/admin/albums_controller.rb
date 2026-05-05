@@ -2,7 +2,7 @@ class Admin::AlbumsController < Admin::BaseController
   before_action :set_album, only: [ :edit, :update, :destroy, :add_post, :remove_post ]
 
   def index
-    @albums = Album.all.order(event_date: :desc)
+    @albums = Album.includes(:campus, :posts).with_attached_cover_image.order(event_date: :desc)
   end
 
   def new

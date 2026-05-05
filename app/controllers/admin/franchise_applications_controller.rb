@@ -1,11 +1,11 @@
 class Admin::FranchiseApplicationsController < Admin::BaseController
-  before_action :set_application, only: [:show, :update]
+  before_action :set_application, only: [ :show, :update ]
   before_action :authorize_application
 
   def index
     @applications = policy_scope(FranchiseApplication).includes(:franchise_payment).order(created_at: :desc)
     authorize FranchiseApplication
-    
+
     @total_count = @applications.count
     @pending_payment_count = @applications.pending_payment.count
     @payment_received_count = @applications.payment_received.count
