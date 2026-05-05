@@ -20,6 +20,9 @@ class WebhooksController < ApplicationController
           status: "succeeded",
           paid_at: Time.current
         )
+        
+        # Send confirmation email
+        FranchiseApplicationMailer.payment_successful(application).deliver_later
       end
     when "payment_intent.payment_failed"
       payment_intent = event.data.object
