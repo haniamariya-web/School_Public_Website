@@ -16,7 +16,15 @@ class Admin::FranchiseApplicationsController < Admin::BaseController
   end
 
   def update
+    old_status = @application.status
     if @application.update(status: params[:status])
+      if @application.status != old_status
+        if @application.approved?
+          FranchiseApplicationMailer.application_approved(@application).deliver_later
+        elsif @application.rejected?
+          FranchiseApplicationMailer.application_rejected(@application).deliver_later
+        end
+      end
       redirect_to admin_franchise_application_path(@application), notice: "Status updated successfully."
     else
       redirect_to admin_franchise_application_path(@application), alert: "Failed to update status."
